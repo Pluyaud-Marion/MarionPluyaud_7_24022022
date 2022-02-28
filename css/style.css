@@ -39,6 +39,47 @@ body {
   padding-left: 3%;
 }
 
+.tag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 3% 0%;
+  width: 100%;
+}
+
+.tag .tag-ingredients {
+  background-color: #3282F7;
+  padding-left: 1%;
+  font-family: 'Lato', sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 10%;
+  height: 30px;
+}
+
+.tag .tag-ustensils {
+  background-color: #ED6454;
+  padding-left: 1%;
+  font-family: 'Lato', sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 10%;
+  height: 30px;
+}
+
+.tag .tag-device {
+  background-color: #68D9A4;
+  padding-left: 1%;
+  font-family: 'Lato', sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 10%;
+  height: 30px;
+}
+
 .filter {
   margin-top: 3%;
   margin-bottom: 3%;
@@ -139,7 +180,7 @@ body {
 
 .container-article .article-recipe .container-ingredient-recipe {
   width: 95%;
-  margin: 0 auto;
+  margin: 3% auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

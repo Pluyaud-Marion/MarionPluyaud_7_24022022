@@ -1,12 +1,16 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
-//console.log(recipes);
+const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
+const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
+const selectDevice = document.getElementById("devices")
+const filter = document.querySelector(".filter-tag")
 
 function main() {
 displayAllRecipes()
 displaySelectIngredients()
 displaySelectUstensils()
 displaySelectDevice()
+displayTag()
 }
 
 function displayAllRecipes() {
@@ -94,8 +98,7 @@ function displaySelectIngredients() {
   const ingredientArray = [] //défini tableau d'ingrédients vide
   let arrayIngredientFinish = [] //défini tableau final vide
 
-  const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
-  
+
   // boucle sur les recettes
   for (const recipe of recipes){
     const ingredientsElement = recipe.ingredients //récupère des tableaux avec tous les éléments d'une recette
@@ -117,13 +120,48 @@ function displaySelectIngredients() {
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
   }
+
+  
 }
+
+function displayTag() {
+  const divTag = document.createElement("div");
+  filter.prepend(divTag)
+  divTag.className = "tag"
+
+  selectIngredients.addEventListener("change", () => {
+    let tagIngredient = selectIngredients.value
+  
+    const spanTag = document.createElement("span")
+    divTag.appendChild(spanTag)
+      
+    spanTag.className = "tag-ingredients"
+    spanTag.innerHTML = tagIngredient
+  })
+
+  selectUstensils.addEventListener("change", () => {
+    let tagUstensil = selectUstensils.value
+    const spanTag = document.createElement("span")
+    divTag.appendChild(spanTag)
+    spanTag.className = "tag-ustensils"
+    spanTag.innerHTML = tagUstensil
+  })
+
+  selectDevice.addEventListener("change", () => {
+    let tagDevice = selectDevice.value
+    const spanTag = document.createElement("span")
+    divTag.appendChild(spanTag)
+    spanTag.className = "tag-device"
+    spanTag.innerHTML = tagDevice
+  })
+}
+
 
 function displaySelectUstensils() {
   const ustensilArray = [] //défini tableau d'ustensils vide
   let arrayUstensilFinish = [] //défini tableau final vide
 
-  const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
+  
 
   //boucle sur chaque recette pour récupérer tous les ustensils
   for (const recipe of recipes){
@@ -149,7 +187,7 @@ function displaySelectDevice() {
   const deviceArray = []
   let arrayDeviceFinish = [];
   
-  const selectDevice = document.getElementById("devices")
+  
 
   for (const recipe of recipes) {
     const deviceElement = recipe.appliance // string
