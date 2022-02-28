@@ -1,16 +1,15 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
-console.log(recipes);
+//console.log(recipes);
 
 function main() {
 displayAllRecipes()
+displaySelectIngredients()
+displaySelectUstensils()
+displaySelectDevice()
 }
 
 function displayAllRecipes() {
-  // for (const recipe of recipes){
-  //   const name = document.querySelector(".title")
-  //   name.innerHTML = recipe.name
-  // }
   const containerArticle = document.querySelector(".container-article")
 
   for (const recipe of recipes) {
@@ -91,6 +90,80 @@ function displayAllRecipes() {
   }
 }
 
+function displaySelectIngredients() {
+  const ingredientArray = [] //défini tableau d'ingrédients vide
+  let arrayIngredientFinish = [] //défini tableau final vide
 
+  const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
+  
+  // boucle sur les recettes
+  for (const recipe of recipes){
+    const ingredientsElement = recipe.ingredients //récupère des tableaux avec tous les éléments d'une recette
+  
+    //boucle sur chaque ingrédients des tableaux
+    for (const ingredient of ingredientsElement) {
+      const ingredientsAll = ingredient.ingredient //récupère tous les ingrédients individuellement
+      ingredientArray.push(ingredientsAll.toLowerCase()) //insère dans tableau ingredientArray chaque ingrédient, en minuscule
+      const uniqueSet = new Set(ingredientArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
+      arrayIngredientFinish = Array.from(uniqueSet)// conversion de uniqueSet en tableau
 
+     // filterArray = ingredientArray.filter((ingredient, index) => ingredientArray.indexOf(ingredient) !== index)
+    }
+  }
+  //boucle sur chaque élément du tableau trié pour créer les balises option et insérer les éléments
+  for (const element of arrayIngredientFinish) {
+    const tagOptionIngredient = document.createElement("option") //créé une balise option pour chaque ingrédient
+    selectIngredients.appendChild(tagOptionIngredient)
+    tagOptionIngredient.value = element
+    tagOptionIngredient.innerHTML = element
+  }
+}
+
+function displaySelectUstensils() {
+  const ustensilArray = [] //défini tableau d'ustensils vide
+  let arrayUstensilFinish = [] //défini tableau final vide
+
+  const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
+
+  //boucle sur chaque recette pour récupérer tous les ustensils
+  for (const recipe of recipes){
+    const ustensilsElement = recipe.ustensils
+    //pour chaque ustenstil = création nouveau tableau sans doublon
+    for (const ustensils of ustensilsElement) {
+      ustensilArray.push(ustensils.toLowerCase()) // remplissage du tableau avec chaque ustensils : nom en minuscule
+      const uniqueSet = new Set(ustensilArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
+      //arrayFinish = [...uniqueSet] // conversion de uniqueSet en tableau
+      arrayUstensilFinish = Array.from(uniqueSet) // conversion de uniqueSet en tableau
+    }
+  }
+  //pour chaque élément du nouveau tableau sans doublon : création balise option + ajout valeur
+  for (const ustensil of arrayUstensilFinish) {
+    const tagOptionUstensils = document.createElement("option") 
+    selectUstensils.appendChild(tagOptionUstensils)
+    tagOptionUstensils.innerHTML = ustensil
+    tagOptionUstensils.value = ustensil
+  }
+}
+
+function displaySelectDevice() {
+  const deviceArray = []
+  let arrayDeviceFinish = [];
+  
+  const selectDevice = document.getElementById("devices")
+
+  for (const recipe of recipes) {
+    const deviceElement = recipe.appliance // string
+
+    deviceArray.push(deviceElement.toLowerCase())
+    const uniqueSet = new Set(deviceArray)
+    arrayDeviceFinish = Array.from(uniqueSet)
+  }
+
+  for (const device of arrayDeviceFinish) {
+    const tagOptionDevice = document.createElement("option")
+    selectDevice.appendChild(tagOptionDevice)
+    tagOptionDevice.innerHTML = device
+    tagOptionDevice.value = device
+  }
+}
 main()

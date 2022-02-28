@@ -38,7 +38,7 @@ body{
     display: flex;
     width: 45%;
     justify-content: space-between;
-    #ingredient, #ustensil, #device {
+    #ingredients, #ustensils, #devices {
         padding-left: 3%;
         font-family: 'Lato', sans-serif;
         border: none;
@@ -47,13 +47,13 @@ body{
         width: 30%;
         height: 50px;
     }
-    #ingredient {
+    #ingredients {
         background-color: #3282F7;
     }
-    #device {
+    #devices {
         background-color: #68D9A4;
     }
-    #ustensil {
+    #ustensils {
         background-color: #ED6454;
     }
 }
@@ -63,7 +63,7 @@ body{
     flex-wrap: wrap;
 
     .article-recipe{
-        width: 30%;
+        width: 31%;
         height: 364px;
         border-radius: 5px;
         margin-bottom: 5%;
@@ -75,12 +75,26 @@ body{
                 object-fit: cover;
             }
             .container-text-title{
+                font-family: 'Lato', sans-serif;
                 width: 95%;
                 height: 40px;
                 margin: 3% auto;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                h2 {
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+                .icon-time {
+                    font-size: 12px;
+                    font-weight: 700;
+                    display: flex;
+                    width: 15%;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-right: 2%;
+                }
             }
             .container-ingredient-recipe{
                 width: 95%;
@@ -89,25 +103,30 @@ body{
                 justify-content: space-between;
                 .ingredient {
                     width: 50%;
-                    font-size: 12px;
+                    font-size: 11.5px;
                     height: 85px;
+                    line-height: 14px;
                     .container-ingredient {
                         display: flex;
+                        font-family: 'Lato', sans-serif;
                         .aliment {
-                            font-size: 11px;
                             font-weight: bold;
                         }
+                   
                     }
                 
                  
                 }
                 .infos-recipe {
+                    font-family: 'Roboto', sans-serif;
                     height: 85px;
-                    width: 50%;
+                    width: 47%;
                     font-size: 12px;
                     text-overflow: ellipsis;
                     overflow: hidden;
                     text-align: start;
+                    line-height: 14px;
+                    margin-right: 2%;
                 }
             }
     }
