@@ -36,33 +36,42 @@ body{
     margin: 3% 0%;
     width: 100%;
     .tag-ingredients {
+        display: flex;
+        align-items: center;
+        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #3282F7;
         padding-left: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
         color: white;
-        width: 10%;
+        width: 15%;
         height: 30px;
     }
     .tag-ustensils {
-        background-color: #ED6454;
+        display: flex;
+        align-items: center;
+        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         padding-left: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
         color: white;
-        width: 10%;
+        width: 15%;
         height: 30px;
+        background-color: #ED6454;
     }
     .tag-device {
+        display: flex;
+        align-items: center;
+        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #68D9A4;
         padding-left: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
         color: white;
-        width: 10%;
+        width: 15%;
         height: 30px;
     }
 }
