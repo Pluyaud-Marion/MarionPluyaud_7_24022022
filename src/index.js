@@ -4,16 +4,18 @@ const selectIngredients = document.getElementById("ingredients") // récupère l
 const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
 const selectDevice = document.getElementById("devices")
 const filter = document.querySelector(".filter-tag")
+const containerArticleRecipes = document.querySelector(".container-article")
 
 function main() {
-displayAllRecipes()
+displayAllRecipes(recipes)
 displaySelectIngredients()
 displaySelectUstensils()
 displaySelectDevice()
 displayTag()
+searchInput()
 }
 
-function displayAllRecipes() {
+function displayAllRecipes(recipes) {
   const containerArticle = document.querySelector(".container-article")
 
   for (const recipe of recipes) {
@@ -197,5 +199,55 @@ function displaySelectDevice() {
     tagOptionDevice.innerHTML = device
     tagOptionDevice.value = device
   }
+}
+
+function searchInput() {
+
+  const searchBar = document.querySelector(".search")
+
+  searchBar.addEventListener("input", e => {
+    const valueInput = e.target.value //récupération de la valeur de l'input
+    if (valueInput.length > 2) {
+      containerArticleRecipes.innerHTML = "" //vide le dom des recettes
+
+     // const filterRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(valueInput.toLowerCase()))
+      //const filterRecipes = recipes.filter(recipe => recipe.description.toLowerCase().includes(valueInput.toLowerCase()))
+
+      // const filterRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(valueInput.toLowerCase()) || recipe.description.toLowerCase().includes(valueInput.toLowerCase()))
+      
+
+      const filterRecipes = recipes.filter(recipe => {
+        for (const item of recipe.ingredients) {
+          return recipe.name.toLowerCase().includes(valueInput.toLowerCase()) || recipe.description.toLowerCase().includes(valueInput.toLowerCase()) || item.ingredient.toLowerCase().includes(valueInput.toLowerCase())
+        }
+      })
+
+      // const filterRecipes = recipes.filter(recipe => {
+      //   //console.log(recipe.ingredients);
+      //  for (let i=0; i<recipe.ingredients.length; i++) {
+      //     //console.log(item.ingredient);
+      //   //console.log(item);
+      //   //   const ingredient = item.ingredient
+      //   // console.log(ingredient);
+      //     return recipe.ingredients[i].ingredient.toLowerCase().includes(valueInput.toLowerCase())
+      //    }
+         
+      // })
+      console.log(filterRecipes);
+     
+  
+    
+      
+      
+      //for (const item of filterRecipes) {
+        //console.log(item)
+      displayAllRecipes(filterRecipes) // appelle à nouveau la fonction pour afficher les recettes avec en paramètre le nouveau tableau trié
+      //}
+
+
+    } else {
+      console.log("il n'y a pas 3 lettres");
+    }
+  })
 }
 main()
