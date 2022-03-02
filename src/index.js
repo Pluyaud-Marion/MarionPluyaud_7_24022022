@@ -161,8 +161,6 @@ function displaySelectUstensils() {
   const ustensilArray = [] //défini tableau d'ustensils vide
   let arrayUstensilFinish = [] //défini tableau final vide
 
-  
-
   //boucle sur chaque recette pour récupérer tous les ustensils
   for (const recipe of recipes){
     const ustensilsElement = recipe.ustensils
@@ -186,9 +184,6 @@ function displaySelectUstensils() {
 function displaySelectDevice() {
   const deviceArray = []
   let arrayDeviceFinish = [];
-  
-  
-
   for (const recipe of recipes) {
     const deviceElement = recipe.appliance // string
 
@@ -196,7 +191,6 @@ function displaySelectDevice() {
     const uniqueSet = new Set(deviceArray)
     arrayDeviceFinish = Array.from(uniqueSet)
   }
-
   for (const device of arrayDeviceFinish) {
     const tagOptionDevice = document.createElement("option")
     selectDevice.appendChild(tagOptionDevice)
