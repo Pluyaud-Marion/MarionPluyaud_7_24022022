@@ -4,17 +4,21 @@ const selectIngredients = document.getElementById("ingredients") // récupère l
 const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
 const selectDevice = document.getElementById("devices")
 const filter = document.querySelector(".filter-tag")
+const containerArticleRecipes = document.querySelector(".container-article")
 
 function main() {
-displayAllRecipes()
+displayAllRecipes(recipes)
 displaySelectIngredients()
 displaySelectUstensils()
 displaySelectDevice()
 displayTag()
-testbranche()
+sortRecipesByTag()
+// sortRecipesByTagIngredient()
+// sortRecipesByTagUstensil()
+// sortRecipesByTagDevice()
 }
 
-function displayAllRecipes() {
+function displayAllRecipes(recipes) {
   const containerArticle = document.querySelector(".container-article")
 
   for (const recipe of recipes) {
@@ -121,7 +125,6 @@ function displaySelectIngredients() {
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
   }
-
   
 }
 
@@ -132,20 +135,20 @@ function displayTag() {
 
   selectIngredients.addEventListener("change", () => {
     let tagIngredient = selectIngredients.value
-  
     const spanTag = document.createElement("span")
     divTag.appendChild(spanTag)
-      
     spanTag.className = "tag-ingredients"
     spanTag.innerHTML = tagIngredient
-  })
 
+  })
+ 
   selectUstensils.addEventListener("change", () => {
     let tagUstensil = selectUstensils.value
     const spanTag = document.createElement("span")
     divTag.appendChild(spanTag)
     spanTag.className = "tag-ustensils"
     spanTag.innerHTML = tagUstensil
+
   })
 
   selectDevice.addEventListener("change", () => {
@@ -154,15 +157,13 @@ function displayTag() {
     divTag.appendChild(spanTag)
     spanTag.className = "tag-device"
     spanTag.innerHTML = tagDevice
+
   })
 }
-
 
 function displaySelectUstensils() {
   const ustensilArray = [] //défini tableau d'ustensils vide
   let arrayUstensilFinish = [] //défini tableau final vide
-
-  
 
   //boucle sur chaque recette pour récupérer tous les ustensils
   for (const recipe of recipes){
@@ -188,8 +189,6 @@ function displaySelectDevice() {
   const deviceArray = []
   let arrayDeviceFinish = [];
   
-  
-
   for (const recipe of recipes) {
     const deviceElement = recipe.appliance // string
 
@@ -206,7 +205,166 @@ function displaySelectDevice() {
   }
 }
 
-function testbranche() {
-  console.log("test");
+let tagSelect = []
+//let allRecipes = []
+
+function sortRecipesByTag() {
+  const selectAll = [selectIngredients, selectDevice, selectUstensils ]
+  //let allRecipes = []
+
+  for (const select of selectAll) {
+    select.addEventListener("input", e => {
+    
+      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
+    
+      const allRecipes = recipes.filter(recipe => 
+        tagSelect.every( tag => {  
+          let filterUstensil = false
+          for (const itemUstensil of recipe.ustensils) {
+            const ustensil = itemUstensil.toLowerCase()
+            if (ustensil.includes(tag.toLowerCase())) {
+              filterUstensil = true
+            }
+          }
+          let filterIngredient = false
+          for (const itemIngredient of recipe.ingredients) {
+            const ingredient = itemIngredient.ingredient.toLowerCase()
+            if (ingredient.includes(tag.toLowerCase())) {
+              filterIngredient = true
+            }
+          }
+        return recipe.appliance.toLowerCase().includes(tag) || filterUstensil || filterIngredient
+        })
+      )
+      containerArticleRecipes.innerHTML = ""
+      displayAllRecipes(allRecipes)
+    })
+  }
+ 
 }
+
+// console.log(tagSelect);
+//     //const recipesSortByIngredient = recipes.filter(recipe => {
+//       allRecipes = recipes.filter(recipe => {
+//       let filterIngredient = false
+
+//       for (const itemIngredient of recipe.ingredients) {
+//         const ingredient = itemIngredient.ingredient.toLowerCase()
+//         if (ingredient.includes(tagIngredient.toLowerCase())) {
+//           filterIngredient = true
+//         }
+//       }
+//       console.log(filterIngredient);
+//       return filterIngredient
+      
+//     })
+//     containerArticleRecipes.innerHTML = ""
+//     //displayAllRecipes(recipesSortByIngredient)
+//     displayAllRecipes(allRecipes)
+
+//   })
+
+//   selectUstensils.addEventListener("change", () => {
+//     let tagUstensil = selectUstensils.value
+//     // filter sur toutes les recettes pour récupérer dans recipesSortByUstensil un nouveau tableau ne contenant que les recettes correspondant aux ustensils choisis
+//      allRecipes = recipes.filter(recipe => {
+//       let filterUstensil = false
+
+//       //boucle sur chaque ustensil pour rentrer dans le tableau
+//       for (const itemUstensil of recipe.ustensils) {
+//         const ustensil = itemUstensil.toLowerCase()
+//         if (ustensil.includes(tagUstensil.toLowerCase())) {
+//           filterUstensil = true
+//         }
+//       }
+//       return { filterUstensil, allRecipes }
+//     })
+//     containerArticleRecipes.innerHTML = "";
+//     displayAllRecipes(allRecipes)
+//     //console.log(recipesSortByUstensil);
+//   })
+
+//   selectDevice.addEventListener("change", () => {
+//     let tagDevice = selectDevice.value
+//     // Tri sur toutes les recettes pour récupérer celles qui ont comme appliance la valeur sélectionnée
+//     allRecipes = recipes.filter(recipe => {
+//       return recipe.appliance.toLowerCase().includes(tagDevice.toLowerCase())
+//     })
+//     containerArticleRecipes.innerHTML = "";
+//     displayAllRecipes(allRecipes);
+//     //console.log(recipesSortByDevice);
+//   })
+  
+//   // let recipesTagFilter = []
+//   // let element = []
+//   // recipesTagFilter = recipes.filter(recipe => {
+//   //   element.every(el => {
+//   //     for(const ingredient of recipe.ingredients){
+//   //       return (recipe.ustensils.includes(el) || recipe.appliance.includes(el) || ingredient.ingredient.includes(el))
+//   //     }
+//   //   })
+//   //   console.log(recipesTagFilter);
+//   // })
+  
+//   displayAllRecipes(allRecipes)
+// }
+
+
+// function sortRecipesByTagIngredient() {
+//   selectIngredients.addEventListener("change", () => {
+//     let tagIngredient = selectIngredients.value
+//     const recipesSortByIngredient = recipes.filter(recipe => {
+//       let filterIngredient = false
+
+//       for (const itemIngredient of recipe.ingredients) {
+//         const ingredient = itemIngredient.ingredient.toLowerCase()
+//         if (ingredient.includes(tagIngredient.toLowerCase())) {
+//           filterIngredient = true
+//         }
+//       }
+//       return filterIngredient
+//     })
+//     containerArticleRecipes.innerHTML = ""
+//     displayAllRecipes(recipesSortByIngredient)
+//     console.log(recipesSortByIngredient);
+//   })
+// }
+
+// function sortRecipesByTagUstensil() {
+//   selectUstensils.addEventListener("change", () => {
+//     let tagUstensil = selectUstensils.value
+//     // filter sur toutes les recettes pour récupérer dans recipesSortByUstensil un nouveau tableau ne contenant que les recettes correspondant aux ustensils choisis
+//     const recipesSortByUstensil = recipes.filter(recipe => {
+//       let filterUstensil = false
+
+//       //boucle sur chaque ustensil pour rentrer dans le tableau
+//       for (const itemUstensil of recipe.ustensils) {
+//         const ustensil = itemUstensil.toLowerCase()
+//         if (ustensil.includes(tagUstensil.toLowerCase())) {
+//           filterUstensil = true
+//         }
+//       }
+//       return filterUstensil
+//     })
+//     containerArticleRecipes.innerHTML = "";
+//     displayAllRecipes(recipesSortByUstensil)
+//     console.log(recipesSortByUstensil);
+//   })
+// }
+
+// function sortRecipesByTagDevice() {
+//   selectDevice.addEventListener("change", () => {
+//     let tagDevice = selectDevice.value
+//     // Tri sur toutes les recettes pour récupérer celles qui ont comme appliance la valeur sélectionnée
+//     const recipesSortByDevice = recipes.filter(recipe => {
+//       return recipe.appliance.toLowerCase().includes(tagDevice.toLowerCase())
+//     })
+//     containerArticleRecipes.innerHTML = "";
+//     displayAllRecipes(recipesSortByDevice);
+//     console.log(recipesSortByDevice);
+//   })
+// }
+
+
+
 main()
