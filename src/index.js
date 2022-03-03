@@ -13,7 +13,6 @@ displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
 displayRecipesBySearchInput()
-displaySelectUstensilsSorted()
 }
 
 function displayAllRecipes(recipes) {
@@ -202,7 +201,7 @@ function displaySelectDevice(recipes) {
   }
 }
 
-//let filterRecipes = [];
+
 
 function displayRecipesBySearchInput() {
   const searchBar = document.querySelector(".search")
@@ -256,8 +255,6 @@ function displayRecipesBySearchInput() {
   })
 }
 
-function displaySelectUstensilsSorted() {
-  //console.log(filterRecipes);
-}
+
 
 main()
