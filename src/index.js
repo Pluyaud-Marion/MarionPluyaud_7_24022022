@@ -248,8 +248,8 @@ function displayRecipesBySearchInput() {
       optionIngredients.innerHTML = "Ingredients"
       displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
 
-   
     } else {
+      displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres");
     }
   })
