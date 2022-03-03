@@ -8,11 +8,12 @@ const containerArticleRecipes = document.querySelector(".container-article")
 
 function main() {
 displayAllRecipes(recipes)
-displaySelectIngredients()
-displaySelectUstensils()
-displaySelectDevice()
+displaySelectIngredients(recipes)
+displaySelectUstensils(recipes)
+displaySelectDevice(recipes)
 displayTag()
-searchInput()
+displayRecipesBySearchInput()
+displaySelectUstensilsSorted()
 }
 
 function displayAllRecipes(recipes) {
@@ -96,7 +97,7 @@ function displayAllRecipes(recipes) {
   }
 }
 
-function displaySelectIngredients() {
+function displaySelectIngredients(recipes) {
   const ingredientArray = [] //défini tableau d'ingrédients vide
   let arrayIngredientFinish = [] //défini tableau final vide
 
@@ -159,7 +160,7 @@ function displayTag() {
 }
 
 
-function displaySelectUstensils() {
+function displaySelectUstensils(recipes) {
   const ustensilArray = [] //défini tableau d'ustensils vide
   let arrayUstensilFinish = [] //défini tableau final vide
 
@@ -183,7 +184,7 @@ function displaySelectUstensils() {
   }
 }
 
-function displaySelectDevice() {
+function displaySelectDevice(recipes) {
   const deviceArray = []
   let arrayDeviceFinish = [];
   for (const recipe of recipes) {
@@ -201,25 +202,22 @@ function displaySelectDevice() {
   }
 }
 
+//let filterRecipes = [];
 
-function searchInput() {
+function displayRecipesBySearchInput() {
   const searchBar = document.querySelector(".search")
+  const selectUstensils = document.getElementById("ustensils");
+  const selectDevices = document.getElementById("devices");
+  const selectIngredients = document.getElementById("ingredients")
 
   searchBar.addEventListener("input", e => {
     const valueInput = e.target.value.toLowerCase() //récupération de la valeur de l'input
     
     if (valueInput.length > 2) {
       containerArticleRecipes.innerHTML = "" //vide le dom des recettes
-
-      const filterRecipes = recipes.filter(recipe => {
+        const filterRecipes = recipes.filter(recipe => {
         let filterIngredient = false 
-
-        // for (let i=0; i < recipe.ingredients.length; i++) {
-        //   const ingredient = recipe.ingredients[i].ingredient.toLowerCase();
-        //   if (ingredient.includes(valueInput)) {
-        //     filterIngredient = true
-        //   }
-        // }
+     
         for (const item of recipe.ingredients) {
           const ingredient = item.ingredient.toLowerCase();
           if (ingredient.includes(valueInput)) {
@@ -228,15 +226,38 @@ function searchInput() {
         }
         return recipe.name.toLowerCase().includes(valueInput) ||
         recipe.description.toLowerCase().includes(valueInput) || filterIngredient
-
       })
       displayAllRecipes(filterRecipes) // appelle à nouveau la fonction pour afficher les recettes avec en paramètre le nouveau tableau trié
-
       console.log(filterRecipes);
+
+      selectUstensils.innerHTML = "" //vide le select ustenstils
+      const optionUstenstils = document.createElement('option')
+      selectUstensils.appendChild(optionUstenstils)
+      optionUstenstils.innerHTML = "Ustensiles"
+      displaySelectUstensils(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+
+
+      selectDevices.innerHTML = ""  //vide le select devices
+      const optionDevices = document.createElement('option')
+      selectDevices.appendChild(optionDevices)
+      optionDevices.innerHTML = "Appareils"
+      displaySelectDevice(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+
+      selectIngredients.innerHTML = ""  //vide le select ingredients
+      const optionIngredients = document.createElement('option')
+      selectIngredients.appendChild(optionIngredients)
+      optionIngredients.innerHTML = "Ingredients"
+      displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+
+   
     } else {
       console.log("il n'y a pas 3 lettres");
     }
   })
+}
+
+function displaySelectUstensilsSorted() {
+  //console.log(filterRecipes);
 }
 
 main()
