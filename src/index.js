@@ -11,6 +11,7 @@ displaySelectIngredients()
 displaySelectUstensils()
 displaySelectDevice()
 displayTag()
+testbranche()
 }
 
 function displayAllRecipes() {
@@ -203,5 +204,9 @@ function displaySelectDevice() {
     tagOptionDevice.innerHTML = device
     tagOptionDevice.value = device
   }
+}
+
+function testbranche() {
+  console.log("test");
 }
 main()
