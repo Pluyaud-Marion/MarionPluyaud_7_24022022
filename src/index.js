@@ -8,9 +8,9 @@ const containerArticleRecipes = document.querySelector(".container-article")
 
 function main() {
 displayAllRecipes(recipes)
-displaySelectIngredients()
-displaySelectUstensils()
-displaySelectDevice()
+displaySelectIngredients(recipes)
+displaySelectUstensils(recipes)
+displaySelectDevice(recipes)
 displayTag()
 sortRecipesByTag()
 // sortRecipesByTagIngredient()
@@ -99,7 +99,7 @@ function displayAllRecipes(recipes) {
   }
 }
 
-function displaySelectIngredients() {
+function displaySelectIngredients(recipes) {
   const ingredientArray = [] //défini tableau d'ingrédients vide
   let arrayIngredientFinish = [] //défini tableau final vide
 
@@ -161,7 +161,7 @@ function displayTag() {
   })
 }
 
-function displaySelectUstensils() {
+function displaySelectUstensils(recipes) {
   const ustensilArray = [] //défini tableau d'ustensils vide
   let arrayUstensilFinish = [] //défini tableau final vide
 
@@ -185,7 +185,7 @@ function displaySelectUstensils() {
   }
 }
 
-function displaySelectDevice() {
+function displaySelectDevice(recipes) {
   const deviceArray = []
   let arrayDeviceFinish = [];
   
@@ -238,6 +238,27 @@ function sortRecipesByTag() {
       )
       containerArticleRecipes.innerHTML = ""
       displayAllRecipes(allRecipes)
+
+
+      selectDevice.innerHTML = ""
+      const optionDevice = document.createElement("option")
+      selectDevice.appendChild(optionDevice)
+      optionDevice.innerHTML = "Appareils"
+      console.log(optionDevice);
+      displaySelectDevice(allRecipes)
+
+      selectIngredients.innerHTML = ""
+      // const optionIngredient = document.createElement("option")
+      // selectIngredients.appendChild(optionIngredient)
+      // optionIngredient.innerHTML = "Ingredients"
+      displaySelectIngredients(allRecipes)
+
+
+      selectUstensils.innerHTML = ""
+      // const optionUstensil = document.createElement("option")
+      // selectUstensils.appendChild(optionUstensil)
+      // optionUstensil.innerHTML = "Ustensiles"
+      displaySelectUstensils(allRecipes)
     })
   }
  
