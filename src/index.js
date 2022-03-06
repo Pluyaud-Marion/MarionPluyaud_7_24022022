@@ -11,11 +11,7 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-displayTag()
 sortRecipesByTag()
-// sortRecipesByTagIngredient()
-// sortRecipesByTagUstensil()
-// sortRecipesByTagDevice()
 }
 
 function displayAllRecipes(recipes) {
@@ -125,41 +121,8 @@ function displaySelectIngredients(recipes) {
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
   }
-  
 }
 
-function displayTag() {
-  const divTag = document.createElement("div");
-  filter.prepend(divTag)
-  divTag.className = "tag"
-
-  selectIngredients.addEventListener("change", () => {
-    let tagIngredient = selectIngredients.value
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-    spanTag.className = "tag-ingredients"
-    spanTag.innerHTML = tagIngredient
-
-  })
- 
-  selectUstensils.addEventListener("change", () => {
-    let tagUstensil = selectUstensils.value
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-    spanTag.className = "tag-ustensils"
-    spanTag.innerHTML = tagUstensil
-
-  })
-
-  selectDevice.addEventListener("change", () => {
-    let tagDevice = selectDevice.value
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-    spanTag.className = "tag-device"
-    spanTag.innerHTML = tagDevice
-
-  })
-}
 
 function displaySelectUstensils(recipes) {
   const ustensilArray = [] //défini tableau d'ustensils vide
@@ -206,18 +169,32 @@ function displaySelectDevice(recipes) {
 }
 
 let tagSelect = []
-//let allRecipes = []
 
 function sortRecipesByTag() {
   const selectAll = [selectIngredients, selectDevice, selectUstensils ]
-  //let allRecipes = []
+  let allRecipes = []
+
+  const divTag = document.createElement("div");
+  filter.prepend(divTag)
+  divTag.className = "tag"
 
   for (const select of selectAll) {
     select.addEventListener("input", e => {
-    
+      let spanTag = document.createElement('span');
+      divTag.appendChild(spanTag)
+      spanTag.innerHTML = e.target.value
+
+      if (select.id === 'ingredients'){
+        spanTag.className = 'tag-ingredients'
+      }else if (select.id === 'devices'){
+        spanTag.className = 'tag-device'
+      }else if (select.id === 'ustensils'){
+        spanTag.className = 'tag-ustensils'
+      }
+      
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
     
-      const allRecipes = recipes.filter(recipe => 
+      allRecipes = recipes.filter(recipe => 
         tagSelect.every( tag => {  
           let filterUstensil = false
           for (const itemUstensil of recipe.ustensils) {
@@ -242,150 +219,23 @@ function sortRecipesByTag() {
 
       selectDevice.innerHTML = ""
       const optionDevice = document.createElement("option")
-      selectDevice.appendChild(optionDevice)
       optionDevice.innerHTML = "Appareils"
-      console.log(optionDevice);
+      selectDevice.prepend(optionDevice)
       displaySelectDevice(allRecipes)
 
       selectIngredients.innerHTML = ""
-      // const optionIngredient = document.createElement("option")
-      // selectIngredients.appendChild(optionIngredient)
-      // optionIngredient.innerHTML = "Ingredients"
+      const optionIngredient = document.createElement("option")
+      selectIngredients.prepend(optionIngredient)
+      optionIngredient.innerHTML = "Ingredients"
       displaySelectIngredients(allRecipes)
 
-
       selectUstensils.innerHTML = ""
-      // const optionUstensil = document.createElement("option")
-      // selectUstensils.appendChild(optionUstensil)
-      // optionUstensil.innerHTML = "Ustensiles"
+      const optionUstensil = document.createElement("option")
+      selectUstensils.prepend(optionUstensil)
+      optionUstensil.innerHTML = "Ustensiles"
       displaySelectUstensils(allRecipes)
     })
   }
- 
 }
-
-// console.log(tagSelect);
-//     //const recipesSortByIngredient = recipes.filter(recipe => {
-//       allRecipes = recipes.filter(recipe => {
-//       let filterIngredient = false
-
-//       for (const itemIngredient of recipe.ingredients) {
-//         const ingredient = itemIngredient.ingredient.toLowerCase()
-//         if (ingredient.includes(tagIngredient.toLowerCase())) {
-//           filterIngredient = true
-//         }
-//       }
-//       console.log(filterIngredient);
-//       return filterIngredient
-      
-//     })
-//     containerArticleRecipes.innerHTML = ""
-//     //displayAllRecipes(recipesSortByIngredient)
-//     displayAllRecipes(allRecipes)
-
-//   })
-
-//   selectUstensils.addEventListener("change", () => {
-//     let tagUstensil = selectUstensils.value
-//     // filter sur toutes les recettes pour récupérer dans recipesSortByUstensil un nouveau tableau ne contenant que les recettes correspondant aux ustensils choisis
-//      allRecipes = recipes.filter(recipe => {
-//       let filterUstensil = false
-
-//       //boucle sur chaque ustensil pour rentrer dans le tableau
-//       for (const itemUstensil of recipe.ustensils) {
-//         const ustensil = itemUstensil.toLowerCase()
-//         if (ustensil.includes(tagUstensil.toLowerCase())) {
-//           filterUstensil = true
-//         }
-//       }
-//       return { filterUstensil, allRecipes }
-//     })
-//     containerArticleRecipes.innerHTML = "";
-//     displayAllRecipes(allRecipes)
-//     //console.log(recipesSortByUstensil);
-//   })
-
-//   selectDevice.addEventListener("change", () => {
-//     let tagDevice = selectDevice.value
-//     // Tri sur toutes les recettes pour récupérer celles qui ont comme appliance la valeur sélectionnée
-//     allRecipes = recipes.filter(recipe => {
-//       return recipe.appliance.toLowerCase().includes(tagDevice.toLowerCase())
-//     })
-//     containerArticleRecipes.innerHTML = "";
-//     displayAllRecipes(allRecipes);
-//     //console.log(recipesSortByDevice);
-//   })
-  
-//   // let recipesTagFilter = []
-//   // let element = []
-//   // recipesTagFilter = recipes.filter(recipe => {
-//   //   element.every(el => {
-//   //     for(const ingredient of recipe.ingredients){
-//   //       return (recipe.ustensils.includes(el) || recipe.appliance.includes(el) || ingredient.ingredient.includes(el))
-//   //     }
-//   //   })
-//   //   console.log(recipesTagFilter);
-//   // })
-  
-//   displayAllRecipes(allRecipes)
-// }
-
-
-// function sortRecipesByTagIngredient() {
-//   selectIngredients.addEventListener("change", () => {
-//     let tagIngredient = selectIngredients.value
-//     const recipesSortByIngredient = recipes.filter(recipe => {
-//       let filterIngredient = false
-
-//       for (const itemIngredient of recipe.ingredients) {
-//         const ingredient = itemIngredient.ingredient.toLowerCase()
-//         if (ingredient.includes(tagIngredient.toLowerCase())) {
-//           filterIngredient = true
-//         }
-//       }
-//       return filterIngredient
-//     })
-//     containerArticleRecipes.innerHTML = ""
-//     displayAllRecipes(recipesSortByIngredient)
-//     console.log(recipesSortByIngredient);
-//   })
-// }
-
-// function sortRecipesByTagUstensil() {
-//   selectUstensils.addEventListener("change", () => {
-//     let tagUstensil = selectUstensils.value
-//     // filter sur toutes les recettes pour récupérer dans recipesSortByUstensil un nouveau tableau ne contenant que les recettes correspondant aux ustensils choisis
-//     const recipesSortByUstensil = recipes.filter(recipe => {
-//       let filterUstensil = false
-
-//       //boucle sur chaque ustensil pour rentrer dans le tableau
-//       for (const itemUstensil of recipe.ustensils) {
-//         const ustensil = itemUstensil.toLowerCase()
-//         if (ustensil.includes(tagUstensil.toLowerCase())) {
-//           filterUstensil = true
-//         }
-//       }
-//       return filterUstensil
-//     })
-//     containerArticleRecipes.innerHTML = "";
-//     displayAllRecipes(recipesSortByUstensil)
-//     console.log(recipesSortByUstensil);
-//   })
-// }
-
-// function sortRecipesByTagDevice() {
-//   selectDevice.addEventListener("change", () => {
-//     let tagDevice = selectDevice.value
-//     // Tri sur toutes les recettes pour récupérer celles qui ont comme appliance la valeur sélectionnée
-//     const recipesSortByDevice = recipes.filter(recipe => {
-//       return recipe.appliance.toLowerCase().includes(tagDevice.toLowerCase())
-//     })
-//     containerArticleRecipes.innerHTML = "";
-//     displayAllRecipes(recipesSortByDevice);
-//     console.log(recipesSortByDevice);
-//   })
-// }
-
-
 
 main()
