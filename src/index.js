@@ -11,7 +11,7 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-sortRecipesByTag()
+sortRecipesByTag(recipes)
 displayRecipesBySearchInput()
 }
 
@@ -171,20 +171,22 @@ function displaySelectDevice(recipes) {
 
 let tagSelect = []
 
-function sortRecipesByTag() {
+const divTag = document.createElement("div");
+filter.prepend(divTag)
+divTag.className = "tag"
+
+function sortRecipesByTag(recipes) {
   const selectAll = [selectIngredients, selectDevice, selectUstensils ]
   let allRecipes = []
-
-  const divTag = document.createElement("div");
-  filter.prepend(divTag)
-  divTag.className = "tag"
-
+  
   for (const select of selectAll) {
-    select.addEventListener("input", e => {
+    select.addEventListener("change", e => {
+      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
+
       let spanTag = document.createElement('span');
       divTag.appendChild(spanTag)
       spanTag.innerHTML = e.target.value
-
+      
       if (select.id === 'ingredients'){
         spanTag.className = 'tag-ingredients'
       }else if (select.id === 'devices'){
@@ -192,10 +194,8 @@ function sortRecipesByTag() {
       }else if (select.id === 'ustensils'){
         spanTag.className = 'tag-ustensils'
       }
-      
-      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
-    
-      allRecipes = recipes.filter(recipe => 
+   
+    allRecipes = recipes.filter(recipe => 
         tagSelect.every( tag => {  
           let filterUstensil = false
           for (const itemUstensil of recipe.ustensils) {
@@ -216,7 +216,6 @@ function sortRecipesByTag() {
       )
       containerArticleRecipes.innerHTML = ""
       displayAllRecipes(allRecipes)
-
 
       selectDevice.innerHTML = ""
       const optionDevice = document.createElement("option")
@@ -264,14 +263,12 @@ function displayRecipesBySearchInput() {
         recipe.description.toLowerCase().includes(valueInput) || filterIngredient
       })
       displayAllRecipes(filterRecipes) // appelle à nouveau la fonction pour afficher les recettes avec en paramètre le nouveau tableau trié
-      console.log(filterRecipes);
 
       selectUstensils.innerHTML = "" //vide le select ustenstils
       const optionUstenstils = document.createElement('option')
       selectUstensils.appendChild(optionUstenstils)
       optionUstenstils.innerHTML = "Ustensiles"
       displaySelectUstensils(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
-
 
       selectDevices.innerHTML = ""  //vide le select devices
       const optionDevices = document.createElement('option')
@@ -284,6 +281,10 @@ function displayRecipesBySearchInput() {
       selectIngredients.appendChild(optionIngredients)
       optionIngredients.innerHTML = "Ingredients"
       displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+
+      
+      /////// pour relancer le tri par tag quand l'user a déjà filtré par searchbar
+      //sortRecipesByTag(filterRecipes) //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
 
     } else {
       displayAllRecipes(recipes)
