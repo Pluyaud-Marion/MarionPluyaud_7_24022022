@@ -11,7 +11,7 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-displayTag()
+sortRecipesByTag()
 displayRecipesBySearchInput()
 }
 
@@ -122,40 +122,6 @@ function displaySelectIngredients(recipes) {
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
   }
-
-  
-}
-
-function displayTag() {
-  const divTag = document.createElement("div");
-  filter.prepend(divTag)
-  divTag.className = "tag"
-
-  selectIngredients.addEventListener("change", () => {
-    let tagIngredient = selectIngredients.value
-  
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-      
-    spanTag.className = "tag-ingredients"
-    spanTag.innerHTML = tagIngredient
-  })
-
-  selectUstensils.addEventListener("change", () => {
-    let tagUstensil = selectUstensils.value
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-    spanTag.className = "tag-ustensils"
-    spanTag.innerHTML = tagUstensil
-  })
-
-  selectDevice.addEventListener("change", () => {
-    let tagDevice = selectDevice.value
-    const spanTag = document.createElement("span")
-    divTag.appendChild(spanTag)
-    spanTag.className = "tag-device"
-    spanTag.innerHTML = tagDevice
-  })
 }
 
 
@@ -186,6 +152,7 @@ function displaySelectUstensils(recipes) {
 function displaySelectDevice(recipes) {
   const deviceArray = []
   let arrayDeviceFinish = [];
+  
   for (const recipe of recipes) {
     const deviceElement = recipe.appliance // string
 
@@ -193,6 +160,7 @@ function displaySelectDevice(recipes) {
     const uniqueSet = new Set(deviceArray)
     arrayDeviceFinish = Array.from(uniqueSet)
   }
+
   for (const device of arrayDeviceFinish) {
     const tagOptionDevice = document.createElement("option")
     selectDevice.appendChild(tagOptionDevice)
@@ -201,6 +169,75 @@ function displaySelectDevice(recipes) {
   }
 }
 
+let tagSelect = []
+
+function sortRecipesByTag() {
+  const selectAll = [selectIngredients, selectDevice, selectUstensils ]
+  let allRecipes = []
+
+  const divTag = document.createElement("div");
+  filter.prepend(divTag)
+  divTag.className = "tag"
+
+  for (const select of selectAll) {
+    select.addEventListener("input", e => {
+      let spanTag = document.createElement('span');
+      divTag.appendChild(spanTag)
+      spanTag.innerHTML = e.target.value
+
+      if (select.id === 'ingredients'){
+        spanTag.className = 'tag-ingredients'
+      }else if (select.id === 'devices'){
+        spanTag.className = 'tag-device'
+      }else if (select.id === 'ustensils'){
+        spanTag.className = 'tag-ustensils'
+      }
+      
+      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
+    
+      allRecipes = recipes.filter(recipe => 
+        tagSelect.every( tag => {  
+          let filterUstensil = false
+          for (const itemUstensil of recipe.ustensils) {
+            const ustensil = itemUstensil.toLowerCase()
+            if (ustensil.includes(tag.toLowerCase())) {
+              filterUstensil = true
+            }
+          }
+          let filterIngredient = false
+          for (const itemIngredient of recipe.ingredients) {
+            const ingredient = itemIngredient.ingredient.toLowerCase()
+            if (ingredient.includes(tag.toLowerCase())) {
+              filterIngredient = true
+            }
+          }
+        return recipe.appliance.toLowerCase().includes(tag) || filterUstensil || filterIngredient
+        })
+      )
+      containerArticleRecipes.innerHTML = ""
+      displayAllRecipes(allRecipes)
+
+
+      selectDevice.innerHTML = ""
+      const optionDevice = document.createElement("option")
+      optionDevice.innerHTML = "Appareils"
+      selectDevice.prepend(optionDevice)
+      displaySelectDevice(allRecipes)
+
+      selectIngredients.innerHTML = ""
+      const optionIngredient = document.createElement("option")
+      selectIngredients.prepend(optionIngredient)
+      optionIngredient.innerHTML = "Ingredients"
+      displaySelectIngredients(allRecipes)
+
+      selectUstensils.innerHTML = ""
+      const optionUstensil = document.createElement("option")
+      selectUstensils.prepend(optionUstensil)
+      optionUstensil.innerHTML = "Ustensiles"
+      displaySelectUstensils(allRecipes)
+    })
+  }
+}
 
 
 function displayRecipesBySearchInput() {
@@ -254,7 +291,6 @@ function displayRecipesBySearchInput() {
     }
   })
 }
-
 
 
 main()
