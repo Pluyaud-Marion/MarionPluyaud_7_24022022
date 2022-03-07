@@ -217,27 +217,51 @@ Fonction qui trie les recettes par tag + gère l'affichage des éléments restan
 */
 function sortRecipesByTag(tagSelect) {
   let allRecipes = []
-
+  let filterDevice = ""
+  let filterIngredient = ""
+  let filterUstensil = ""
+  const tagsUstensils = document.querySelectorAll(".tag-ustensils")
+  const tagsDevices = document.querySelectorAll(".tag-device")
+  const tagsIngredients = document.querySelectorAll(".tag-ingredients")
+  
+  /*
+  filter sur tableau des recettes avec every pour cibler chaque tag. 
+  Boucle sur toutes les balises tagustensils
+  Défini par défaut fitlerustensil sur false
+  Boucle sur tous les ustensils des recettes
+  Si l'un des ustensils des recettes incluent le tag ET que l'id de la balise tagustensil (id = intitulé du tag) est égale à l'un des ustensils qu'on trouve dans les recettes -> on passe filterUstensil à true
+  Idem pour chacun des 3 selects, on retourne les résultats (true / false) = les recettes filtrées --> allRecipes
+  */
   allRecipes = recipes.filter(recipe => 
-    tagSelect.every( tag => {  
-    
-      let filterUstensil = false
-      for (const itemUstensil of recipe.ustensils) {
-        const ustensil = itemUstensil.toLowerCase()
-        if (ustensil.includes(tag.toLowerCase())) {
-          filterUstensil = true
+    tagSelect.every(tag => {  
+      for (const tagUstensil of tagsUstensils) {
+        filterUstensil = false
+        for (const itemUstensil of recipe.ustensils) {
+          const ustensil = itemUstensil.toLowerCase()
+          if (ustensil.includes(tag.toLowerCase()) && tagUstensil.id === ustensil) {
+            filterUstensil = true
+          }
         }
       }
-      let filterIngredient = false
-      for (const itemIngredient of recipe.ingredients) {
-        const ingredient = itemIngredient.ingredient.toLowerCase()
-        if (ingredient.includes(tag.toLowerCase())) {
-          filterIngredient = true
+      for (const tagIngredient of tagsIngredients) {
+        filterIngredient = false
+        for (const itemIngredient of recipe.ingredients) {
+          const ingredient = itemIngredient.ingredient.toLowerCase()
+          if (ingredient.includes(tag.toLowerCase()) && tagIngredient.id === ingredient) {
+            filterIngredient = true
+          }
         }
       }
-    return recipe.appliance.toLowerCase().includes(tag) || filterUstensil || filterIngredient
+      for (const tagDevice of tagsDevices) {
+        filterDevice = false
+        if (recipe.appliance.toLowerCase().includes(tag) && tagDevice.id === recipe.appliance.toLowerCase()) {
+          return true
+        }
+      }
+      return filterDevice || filterUstensil || filterIngredient
     })
   )
+   
   containerArticleRecipes.innerHTML = ""
   displayAllRecipes(allRecipes)
 
@@ -260,7 +284,6 @@ function sortRecipesByTag(tagSelect) {
   displaySelectUstensils(allRecipes)
 
   closeTag()
-  
 }
 
 /*
