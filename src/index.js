@@ -231,26 +231,28 @@ function sortRecipesByTag(tagSelect) {
   */
   allRecipes = recipes.filter(recipe => 
     tagSelect.every(tag => {  
-      for (const tagUstensil of tagsUstensils) {
-        filterUstensil = false
-        for (const itemUstensil of recipe.ustensils) {
-          const ustensil = itemUstensil.toLowerCase()
+      filterUstensil = false
+      for (const itemUstensil of recipe.ustensils) {
+        const ustensil = itemUstensil.toLowerCase()
+        for (const tagUstensil of tagsUstensils) {
           if (ustensil.includes(tag.toLowerCase()) && tagUstensil.id === ustensil) {
             filterUstensil = true
           }
         }
       }
-      for (const tagIngredient of tagsIngredients) {
-        filterIngredient = false
-        for (const itemIngredient of recipe.ingredients) {
-          const ingredient = itemIngredient.ingredient.toLowerCase()
+    
+      filterIngredient = false
+      for (const itemIngredient of recipe.ingredients) {
+        const ingredient = itemIngredient.ingredient.toLowerCase()
+        for (const tagIngredient of tagsIngredients) {
           if (ingredient.includes(tag.toLowerCase()) && tagIngredient.id === ingredient) {
             filterIngredient = true
           }
         }
       }
+      
+      filterDevice = false
       for (const tagDevice of tagsDevices) {
-        filterDevice = false
         if (recipe.appliance.toLowerCase().includes(tag) && tagDevice.id === recipe.appliance.toLowerCase()) {
           return true
         }
