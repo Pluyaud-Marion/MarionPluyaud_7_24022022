@@ -11,7 +11,6 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-//sortRecipesByTag(tagSelect)
 displayTag()
 }
 
@@ -171,6 +170,9 @@ function displaySelectDevice(recipes) {
 
 let tagSelect = []
 
+/*
+Fonction qui gère la construction des éléments des tags et leur affichage dans le dom
+*/
 function displayTag() {
   const selectAll = [selectIngredients, selectDevice, selectUstensils ]
 
@@ -194,30 +196,30 @@ function displayTag() {
       if (select.id === 'ingredients'){
         divTagSpanImg.className = 'tag-ingredients'
         divTagSpanImg.id = e.target.value
-        //imgTag.id = e.target.value
-      }else if (select.id === 'devices'){
+      } else if (select.id === 'devices'){
         divTagSpanImg.className = 'tag-device'
         divTagSpanImg.id = e.target.value
-        //imgTag.id = e.target.value
-      }else if (select.id === 'ustensils'){
+      } else if (select.id === 'ustensils'){
         divTagSpanImg.className = 'tag-ustensils'
         divTagSpanImg.id = e.target.value
-        //divTagSpanImg.id = e.target.value
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
-      sortRecipesByTag(tagSelect)
+      sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
       
     })
   }
 }
 
+/*
+Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
+*/
 function sortRecipesByTag(tagSelect) {
   let allRecipes = []
 
   allRecipes = recipes.filter(recipe => 
     tagSelect.every( tag => {  
-      //console.log(tag);
+    
       let filterUstensil = false
       for (const itemUstensil of recipe.ustensils) {
         const ustensil = itemUstensil.toLowerCase()
@@ -260,6 +262,11 @@ function sortRecipesByTag(tagSelect) {
   
 }
 
+/*
+Fonction pour fermer un tag au click sur la croix
+Tri à nouveau les recettes affichées + l'affichage des éléments des selects par rapport aux recettes restantes
+*/
+
 function closeTag() {
   const close = document.getElementsByClassName("close-tag")
   const tagsIngredients = document.querySelectorAll(".tag-ingredients")
@@ -271,16 +278,17 @@ function closeTag() {
       item.addEventListener("click", () => {
         let arrayTag = []
 
-        tagSelect.forEach(tag => arrayTag.push(tag))
-        let index = arrayTag.indexOf(item.id)
-        arrayTag.splice(index, 1)
+        tagSelect.forEach(tag => arrayTag.push(tag)) //pour chaque tag choisi on ajoute les tags dans le tableau arrayTag
+        let index = arrayTag.indexOf(item.id) //dans le tableau récupération de l'index de l'élément cliqué
+      
+        arrayTag.splice(index, 1) //suppression de cet élément par son index
 
-        if (item.id === tagIngredient.id) {
+        if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
           tagIngredient.remove()
         }
 
         console.log("ingredient",arrayTag);
-        // si plus de tag = renvoi toutes les recettes
+        // si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
         if (arrayTag.length === 0) {
           displaySelectDevice(recipes)
           displaySelectIngredients(recipes)
