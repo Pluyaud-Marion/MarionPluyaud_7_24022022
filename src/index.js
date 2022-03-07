@@ -216,6 +216,7 @@ function displayTag() {
 Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
 */
 function sortRecipesByTag(tagSelect) {
+  console.log(tagSelect);
   let allRecipes = []
   let filterDevice = ""
   let filterIngredient = ""
@@ -384,16 +385,16 @@ function displayRecipesBySearchInput() {
     if (valueInput.length > 2) {
       containerArticleRecipes.innerHTML = "" //vide le dom des recettes
         const filterRecipes = recipes.filter(recipe => {
-        let filterIngredient = false 
-     
-        for (const item of recipe.ingredients) {
-          const ingredient = item.ingredient.toLowerCase();
-          if (ingredient.includes(valueInput)) {
-            filterIngredient = true
+          let filterIngredient = false 
+      
+          for (const item of recipe.ingredients) {
+            const ingredient = item.ingredient.toLowerCase();
+            if (ingredient.includes(valueInput)) {
+              filterIngredient = true
+            }
           }
-        }
-        return recipe.name.toLowerCase().includes(valueInput) ||
-        recipe.description.toLowerCase().includes(valueInput) || filterIngredient
+          return recipe.name.toLowerCase().includes(valueInput) ||
+          recipe.description.toLowerCase().includes(valueInput) || filterIngredient
       })
       displayAllRecipes(filterRecipes) // appelle à nouveau la fonction pour afficher les recettes avec en paramètre le nouveau tableau trié
 
@@ -414,15 +415,17 @@ function displayRecipesBySearchInput() {
       selectIngredients.appendChild(optionIngredients)
       optionIngredients.innerHTML = "Ingredients"
       displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
-
       
       /////// pour relancer le tri par tag quand l'user a déjà filtré par searchbar
-      //sortRecipesByTag(filterRecipes) //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
-
+      //sortRecipesByTag() //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
+    
+      
+    
     } else {
       displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres");
     }
+    
   })
 }
 
