@@ -11,8 +11,8 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-sortRecipesByTag(tagSelect)
-
+//sortRecipesByTag(tagSelect)
+displayTag()
 }
 
 function displayAllRecipes(recipes) {
@@ -171,10 +171,8 @@ function displaySelectDevice(recipes) {
 
 let tagSelect = []
 
-
-function sortRecipesByTag(tagSelect) {
+function displayTag() {
   const selectAll = [selectIngredients, selectDevice, selectUstensils ]
-  let allRecipes = []
 
   const divTag = document.createElement("div");
   filter.prepend(divTag)
@@ -206,54 +204,60 @@ function sortRecipesByTag(tagSelect) {
         divTagSpanImg.id = e.target.value
         //divTagSpanImg.id = e.target.value
       }
-      
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
-    
-      allRecipes = recipes.filter(recipe => 
-        tagSelect.every( tag => {  
-          let filterUstensil = false
-          for (const itemUstensil of recipe.ustensils) {
-            const ustensil = itemUstensil.toLowerCase()
-            if (ustensil.includes(tag.toLowerCase())) {
-              filterUstensil = true
-            }
-          }
-          let filterIngredient = false
-          for (const itemIngredient of recipe.ingredients) {
-            const ingredient = itemIngredient.ingredient.toLowerCase()
-            if (ingredient.includes(tag.toLowerCase())) {
-              filterIngredient = true
-            }
-          }
-        return recipe.appliance.toLowerCase().includes(tag) || filterUstensil || filterIngredient
-        })
-      )
-      containerArticleRecipes.innerHTML = ""
-      displayAllRecipes(allRecipes)
-
-     
-      selectDevice.innerHTML = ""
-      const optionDevice = document.createElement("option")
-      optionDevice.innerHTML = "Appareils"
-      selectDevice.prepend(optionDevice)
-      displaySelectDevice(allRecipes)
-
-      selectIngredients.innerHTML = ""
-      const optionIngredient = document.createElement("option")
-      selectIngredients.prepend(optionIngredient)
-      optionIngredient.innerHTML = "Ingredients"
-      displaySelectIngredients(allRecipes)
-
-      selectUstensils.innerHTML = ""
-      const optionUstensil = document.createElement("option")
-      selectUstensils.prepend(optionUstensil)
-      optionUstensil.innerHTML = "Ustensiles"
-      displaySelectUstensils(allRecipes)
-
-      closeTag()
+      
+      sortRecipesByTag(tagSelect)
       
     })
   }
+}
+
+function sortRecipesByTag(tagSelect) {
+  let allRecipes = []
+
+  allRecipes = recipes.filter(recipe => 
+    tagSelect.every( tag => {  
+      //console.log(tag);
+      let filterUstensil = false
+      for (const itemUstensil of recipe.ustensils) {
+        const ustensil = itemUstensil.toLowerCase()
+        if (ustensil.includes(tag.toLowerCase())) {
+          filterUstensil = true
+        }
+      }
+      let filterIngredient = false
+      for (const itemIngredient of recipe.ingredients) {
+        const ingredient = itemIngredient.ingredient.toLowerCase()
+        if (ingredient.includes(tag.toLowerCase())) {
+          filterIngredient = true
+        }
+      }
+    return recipe.appliance.toLowerCase().includes(tag) || filterUstensil || filterIngredient
+    })
+  )
+  containerArticleRecipes.innerHTML = ""
+  displayAllRecipes(allRecipes)
+
+  selectDevice.innerHTML = ""
+  const optionDevice = document.createElement("option")
+  optionDevice.innerHTML = "Appareils"
+  selectDevice.prepend(optionDevice)
+  displaySelectDevice(allRecipes)
+
+  selectIngredients.innerHTML = ""
+  const optionIngredient = document.createElement("option")
+  selectIngredients.prepend(optionIngredient)
+  optionIngredient.innerHTML = "Ingredients"
+  displaySelectIngredients(allRecipes)
+
+  selectUstensils.innerHTML = ""
+  const optionUstensil = document.createElement("option")
+  selectUstensils.prepend(optionUstensil)
+  optionUstensil.innerHTML = "Ustensiles"
+  displaySelectUstensils(allRecipes)
+
+  closeTag()
+  
 }
 
 function closeTag() {
@@ -274,8 +278,17 @@ function closeTag() {
         if (item.id === tagIngredient.id) {
           tagIngredient.remove()
         }
-        
-        //sortRecipesByTag(arrayTag)
+
+        console.log("ingredient",arrayTag);
+        // si plus de tag = renvoi toutes les recettes
+        if (arrayTag.length === 0) {
+          displaySelectDevice(recipes)
+          displaySelectIngredients(recipes)
+          displaySelectUstensils(recipes)
+          displayAllRecipes(recipes)
+        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+          sortRecipesByTag(arrayTag)
+        }
       })
     }
   }
@@ -290,8 +303,15 @@ function closeTag() {
         if (item.id === tagDevice.id) {
           tagDevice.remove()
         }
-    
-        //sortRecipesByTag(arrayTag)
+        console.log("appareil",arrayTag);
+        if (arrayTag.length === 0) {
+          displaySelectDevice(recipes)
+          displaySelectIngredients(recipes)
+          displaySelectUstensils(recipes)
+          displayAllRecipes(recipes)
+        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+          sortRecipesByTag(arrayTag)
+        }
       })
     }
   }
@@ -305,36 +325,19 @@ function closeTag() {
         if (item.id === tagUstensil.id) {
           tagUstensil.remove()
         }
-        console.log(arrayTag);
-        sortRecipesByTag(arrayTag)
-      })
-
-    }
-    
-  }
-  
-  
-//   for (const item of close) {
-//     for (const tagIngredient of tagsIngredients) {
-//       item.addEventListener("click", () => {
-    
-//         let arrayTag = []
-//         tagSelect.forEach(tag => arrayTag.push(tag))
-    
-//         let index = arrayTag.indexOf(item.id)
-        
-//         arrayTag.splice(index, 1)
-
-//         if (item.id === tagIngredient.id) {
-//           tagIngredient.remove()
-//         }
-       
  
-//         sortRecipesByTag(arrayTag)
-//       })
-//     }
-
-// }
-  
+        console.log("ustensil",arrayTag);
+        if (arrayTag.length === 0) {
+          displaySelectDevice(recipes)
+          displaySelectIngredients(recipes)
+          displaySelectUstensils(recipes)
+          displayAllRecipes(recipes)
+        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+          sortRecipesByTag(arrayTag)
+        }
+      })
+    }
+  }
 }
+
 main()
