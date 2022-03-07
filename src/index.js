@@ -11,7 +11,8 @@ displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
-sortRecipesByTag()
+sortRecipesByTag(tagSelect)
+
 }
 
 function displayAllRecipes(recipes) {
@@ -170,7 +171,8 @@ function displaySelectDevice(recipes) {
 
 let tagSelect = []
 
-function sortRecipesByTag() {
+
+function sortRecipesByTag(tagSelect) {
   const selectAll = [selectIngredients, selectDevice, selectUstensils ]
   let allRecipes = []
 
@@ -180,16 +182,29 @@ function sortRecipesByTag() {
 
   for (const select of selectAll) {
     select.addEventListener("input", e => {
-      let spanTag = document.createElement('span');
-      divTag.appendChild(spanTag)
+      let divTagSpanImg = document.createElement('div');
+      divTag.appendChild(divTagSpanImg)
+      let spanTag = document.createElement('span')
+      divTagSpanImg.appendChild(spanTag)
       spanTag.innerHTML = e.target.value
+      let imgTag = document.createElement('img');
+      divTagSpanImg.appendChild(imgTag)
+      imgTag.src = "../assets/close-tag.png"
+      imgTag.id = e.target.value //donne comme id à l'img le nom du tag
+      imgTag.className = "close-tag"
 
       if (select.id === 'ingredients'){
-        spanTag.className = 'tag-ingredients'
+        divTagSpanImg.className = 'tag-ingredients'
+        divTagSpanImg.id = e.target.value
+        //imgTag.id = e.target.value
       }else if (select.id === 'devices'){
-        spanTag.className = 'tag-device'
+        divTagSpanImg.className = 'tag-device'
+        divTagSpanImg.id = e.target.value
+        //imgTag.id = e.target.value
       }else if (select.id === 'ustensils'){
-        spanTag.className = 'tag-ustensils'
+        divTagSpanImg.className = 'tag-ustensils'
+        divTagSpanImg.id = e.target.value
+        //divTagSpanImg.id = e.target.value
       }
       
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
@@ -216,7 +231,7 @@ function sortRecipesByTag() {
       containerArticleRecipes.innerHTML = ""
       displayAllRecipes(allRecipes)
 
-
+     
       selectDevice.innerHTML = ""
       const optionDevice = document.createElement("option")
       optionDevice.innerHTML = "Appareils"
@@ -234,8 +249,92 @@ function sortRecipesByTag() {
       selectUstensils.prepend(optionUstensil)
       optionUstensil.innerHTML = "Ustensiles"
       displaySelectUstensils(allRecipes)
+
+      closeTag()
+      
     })
   }
 }
 
+function closeTag() {
+  const close = document.getElementsByClassName("close-tag")
+  const tagsIngredients = document.querySelectorAll(".tag-ingredients")
+  const tagsUstensils = document.querySelectorAll(".tag-ustensils")
+  const tagsDevices = document.querySelectorAll(".tag-device")
+  
+  for (const item of close) {
+    for (const tagIngredient of tagsIngredients) {
+      item.addEventListener("click", () => {
+        let arrayTag = []
+
+        tagSelect.forEach(tag => arrayTag.push(tag))
+        let index = arrayTag.indexOf(item.id)
+        arrayTag.splice(index, 1)
+
+        if (item.id === tagIngredient.id) {
+          tagIngredient.remove()
+        }
+        
+        //sortRecipesByTag(arrayTag)
+      })
+    }
+  }
+ 
+  for (const item of close) {
+    for (const tagDevice of tagsDevices) {
+      item.addEventListener("click", () => {
+        let arrayTag = []
+        tagSelect.forEach(tag => arrayTag.push(tag))
+        let index = arrayTag.indexOf(item.id)
+        arrayTag.splice(index, 1)
+        if (item.id === tagDevice.id) {
+          tagDevice.remove()
+        }
+    
+        //sortRecipesByTag(arrayTag)
+      })
+    }
+  }
+  for (const item of close) {
+    for (const tagUstensil of tagsUstensils) {
+      item.addEventListener("click", () => {
+        let arrayTag = []
+        tagSelect.forEach(tag => arrayTag.push(tag))
+        let index = arrayTag.indexOf(item.id)
+        arrayTag.splice(index, 1)
+        if (item.id === tagUstensil.id) {
+          tagUstensil.remove()
+        }
+        console.log(arrayTag);
+        sortRecipesByTag(arrayTag)
+      })
+
+    }
+    
+  }
+  
+  
+//   for (const item of close) {
+//     for (const tagIngredient of tagsIngredients) {
+//       item.addEventListener("click", () => {
+    
+//         let arrayTag = []
+//         tagSelect.forEach(tag => arrayTag.push(tag))
+    
+//         let index = arrayTag.indexOf(item.id)
+        
+//         arrayTag.splice(index, 1)
+
+//         if (item.id === tagIngredient.id) {
+//           tagIngredient.remove()
+//         }
+       
+ 
+//         sortRecipesByTag(arrayTag)
+//       })
+//     }
+
+// }
+  
+}
 main()

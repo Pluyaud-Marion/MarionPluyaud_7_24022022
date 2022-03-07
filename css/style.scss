@@ -38,9 +38,11 @@ body{
     .tag-ingredients {
         display: flex;
         align-items: center;
-        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
+        justify-content: space-between;
+        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #3282F7;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
@@ -51,8 +53,10 @@ body{
     .tag-ustensils {
         display: flex;
         align-items: center;
-        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
+        justify-content: space-between;
+        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
@@ -64,9 +68,11 @@ body{
     .tag-device {
         display: flex;
         align-items: center;
-        background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
+        justify-content: space-between;
+        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #68D9A4;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
