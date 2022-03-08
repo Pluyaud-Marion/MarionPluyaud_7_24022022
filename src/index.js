@@ -12,6 +12,7 @@ displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
+//closeTag()
 }
 
 function displayAllRecipes(recipes) {
@@ -205,8 +206,12 @@ function displayTag() {
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
       sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
+     
+      closeTag()
+      //console.log("tagSelect dans display tag",tagSelect);
     })
   }
+  
 }
 
 /*
@@ -282,7 +287,7 @@ function sortRecipesByTag(tagSelect) {
   optionUstensil.innerHTML = "Ustensiles"
   displaySelectUstensils(allRecipes)
 
-  closeTag()
+  //closeTag()
   
 
 }
@@ -297,80 +302,172 @@ function closeTag() {
   const tagsIngredients = document.querySelectorAll(".tag-ingredients")
   const tagsUstensils = document.querySelectorAll(".tag-ustensils")
   const tagsDevices = document.querySelectorAll(".tag-device")
-  
+ 
+  let arrayTag = []
+  tagSelect.forEach(tag => arrayTag.push(tag)) //pour chaque tag choisi on ajoute les tags dans le tableau arrayTag
+
   for (const item of close) {
-    for (const tagIngredient of tagsIngredients) {
-      item.addEventListener("click", () => {
-        let arrayTag = []
-
-        tagSelect.forEach(tag => arrayTag.push(tag)) //pour chaque tag choisi on ajoute les tags dans le tableau arrayTag
-        let index = arrayTag.indexOf(item.id) //dans le tableau récupération de l'index de l'élément cliqué
-      
-        arrayTag.splice(index, 1) //suppression de cet élément par son index
-
+    item.addEventListener("click", () => {
+      for (const tagIngredient of tagsIngredients) {
         if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
           tagIngredient.remove()
+          let index = arrayTag.indexOf(tagIngredient.id) //dans le tableau récupération de l'index de l'élément cliqué
+          arrayTag.splice(index, 1) //suppression de cet élément par son index
         }
+      }
 
-        console.log("ingredient",arrayTag);
-        // si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
-        if (arrayTag.length === 0) {
-          displaySelectDevice(recipes)
-          displaySelectIngredients(recipes)
-          displaySelectUstensils(recipes)
-          displayAllRecipes(recipes)
-        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
-        }
-      })
-    }
-  }
- 
-  for (const item of close) {
-    for (const tagDevice of tagsDevices) {
-      item.addEventListener("click", () => {
-        let arrayTag = []
-        tagSelect.forEach(tag => arrayTag.push(tag))
-        let index = arrayTag.indexOf(item.id)
-        arrayTag.splice(index, 1)
+      for (const tagDevice of tagsDevices) {
         if (item.id === tagDevice.id) {
           tagDevice.remove()
+          let index = tagSelect.indexOf(tagDevice.id) //dans le tableau récupération de l'index de l'élément cliqué
+          tagSelect.splice(index, 1) //suppression de cet élément par son index
         }
-        console.log("appareil",arrayTag);
-        if (arrayTag.length === 0) {
-          displaySelectDevice(recipes)
-          displaySelectIngredients(recipes)
-          displaySelectUstensils(recipes)
-          displayAllRecipes(recipes)
-        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
-        }
-      })
-    }
-  }
-  for (const item of close) {
-    for (const tagUstensil of tagsUstensils) {
-      item.addEventListener("click", () => {
-        let arrayTag = []
-        tagSelect.forEach(tag => arrayTag.push(tag))
-        let index = arrayTag.indexOf(item.id)
-        arrayTag.splice(index, 1)
+      }
+      for (const tagUstensil of tagsUstensils) {
         if (item.id === tagUstensil.id) {
           tagUstensil.remove()
+          let index = tagSelect.indexOf(tagUstensil.id) //dans le tableau récupération de l'index de l'élément cliqué
+          tagSelect.splice(index, 1) //suppression de cet élément par son index
         }
+      }
+      
+      //si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
+      if (arrayTag.length === 0) {
+        console.log("vide");
+        displaySelectDevice(recipes)
+        displaySelectIngredients(recipes)
+        displaySelectUstensils(recipes)
+        displayAllRecipes(recipes)
+      } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+        sortRecipesByTag(arrayTag)
+      }
+
+    })
+    
+}
+
+
+  // for (const item of close) {
+  //   for (const tagDevice of tagsDevices) {
+  //     //console.log(tagDevice);
+  //     item.addEventListener("click", () => {
+  //       let arrayTag = []
+  //       tagSelect.forEach(tag => arrayTag.push(tag))
+  //       let index = arrayTag.indexOf(item.id)
+  //       arrayTag.splice(index, 1)
+  //       if (item.id === tagDevice.id) {
+  //         tagDevice.remove()
+  //       }
+  //       console.log("appareil",arrayTag);
+  //       if (arrayTag.length === 0) {
+  //         displaySelectDevice(recipes)
+  //         displaySelectIngredients(recipes)
+  //         displaySelectUstensils(recipes)
+  //         displayAllRecipes(recipes)
+  //       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+  //         sortRecipesByTag(arrayTag)
+  //       }
+  //     })
+  //   }
+  // }
+  // for (const item of close) {
+  //   for (const tagUstensil of tagsUstensils) {
+  //     item.addEventListener("click", () => {
+  //       let arrayTag = []
+  //       tagSelect.forEach(tag => arrayTag.push(tag))
+  //       let index = arrayTag.indexOf(item.id)
+  //       arrayTag.splice(index, 1)
+  //       if (item.id === tagUstensil.id) {
+  //         tagUstensil.remove()
+  //       }
  
-        console.log("ustensil",arrayTag);
-        if (arrayTag.length === 0) {
-          displaySelectDevice(recipes)
-          displaySelectIngredients(recipes)
-          displaySelectUstensils(recipes)
-          displayAllRecipes(recipes)
-        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
-        }
-      })
-    }
-  }
+  //       console.log("ustensil",arrayTag);
+  //       if (arrayTag.length === 0) {
+  //         displaySelectDevice(recipes)
+  //         displaySelectIngredients(recipes)
+  //         displaySelectUstensils(recipes)
+  //         displayAllRecipes(recipes)
+  //       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+  //         sortRecipesByTag(arrayTag)
+  //       }
+  //     })
+  //   }
+  // }
+
+
+  // for (const item of close) {
+  //   for (const tagIngredient of tagsIngredients) {
+  //     item.addEventListener("click", () => {
+  //       let arrayTag = []
+
+  //       tagSelect.forEach(tag => arrayTag.push(tag)) //pour chaque tag choisi on ajoute les tags dans le tableau arrayTag
+  //       let index = arrayTag.indexOf(item.id) //dans le tableau récupération de l'index de l'élément cliqué
+      
+  //       arrayTag.splice(index, 1) //suppression de cet élément par son index
+
+  //       if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
+  //         tagIngredient.remove()
+  //       }
+
+  //       console.log("ingredient",arrayTag);
+  //       // si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
+  //       if (arrayTag.length === 0) {
+  //         displaySelectDevice(recipes)
+  //         displaySelectIngredients(recipes)
+  //         displaySelectUstensils(recipes)
+  //         displayAllRecipes(recipes)
+  //       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+  //         sortRecipesByTag(arrayTag)
+  //       }
+  //     })
+  //   }
+  // }
+ 
+  // for (const item of close) {
+  //   for (const tagDevice of tagsDevices) {
+  //     item.addEventListener("click", () => {
+  //       let arrayTag = []
+  //       tagSelect.forEach(tag => arrayTag.push(tag))
+  //       let index = arrayTag.indexOf(item.id)
+  //       arrayTag.splice(index, 1)
+  //       if (item.id === tagDevice.id) {
+  //         tagDevice.remove()
+  //       }
+  //       console.log("appareil",arrayTag);
+  //       if (arrayTag.length === 0) {
+  //         displaySelectDevice(recipes)
+  //         displaySelectIngredients(recipes)
+  //         displaySelectUstensils(recipes)
+  //         displayAllRecipes(recipes)
+  //       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+  //         sortRecipesByTag(arrayTag)
+  //       }
+  //     })
+  //   }
+  // }
+  // for (const item of close) {
+  //   for (const tagUstensil of tagsUstensils) {
+  //     item.addEventListener("click", () => {
+  //       let arrayTag = []
+  //       tagSelect.forEach(tag => arrayTag.push(tag))
+  //       let index = arrayTag.indexOf(item.id)
+  //       arrayTag.splice(index, 1)
+  //       if (item.id === tagUstensil.id) {
+  //         tagUstensil.remove()
+  //       }
+ 
+  //       console.log("ustensil",arrayTag);
+  //       if (arrayTag.length === 0) {
+  //         displaySelectDevice(recipes)
+  //         displaySelectIngredients(recipes)
+  //         displaySelectUstensils(recipes)
+  //         displayAllRecipes(recipes)
+  //       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+  //         sortRecipesByTag(arrayTag)
+  //       }
+  //     })
+  //   }
+  // }
 }
 
 main()
