@@ -12,6 +12,7 @@ displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
+
 displayRecipesBySearchInput()
 }
 
@@ -206,7 +207,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
-      sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
+      sortRecipesByTag(tagSelect, recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
       
     })
   }
@@ -215,9 +216,9 @@ function displayTag() {
 /*
 Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
 */
-function sortRecipesByTag(tagSelect) {
-  console.log(tagSelect);
-  let allRecipes = []
+
+function sortRecipesByTag(tagSelect, recipes) {
+  let allRecipes = [];
   let filterDevice = ""
   let filterIngredient = ""
   let filterUstensil = ""
@@ -267,6 +268,7 @@ function sortRecipesByTag(tagSelect) {
    
   containerArticleRecipes.innerHTML = ""
   displayAllRecipes(allRecipes)
+  
 
   selectDevice.innerHTML = ""
   const optionDevice = document.createElement("option")
@@ -287,6 +289,8 @@ function sortRecipesByTag(tagSelect) {
   displaySelectUstensils(allRecipes)
 
   closeTag()
+
+  
 }
 
 /*
@@ -294,7 +298,9 @@ Fonction pour fermer un tag au click sur la croix
 Tri à nouveau les recettes affichées + l'affichage des éléments des selects par rapport aux recettes restantes
 */
 
+
 function closeTag() {
+  
   const close = document.getElementsByClassName("close-tag")
   const tagsIngredients = document.querySelectorAll(".tag-ingredients")
   const tagsUstensils = document.querySelectorAll(".tag-ustensils")
@@ -313,8 +319,6 @@ function closeTag() {
         if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
           tagIngredient.remove()
         }
-
-        console.log("ingredient",arrayTag);
         // si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
         if (arrayTag.length === 0) {
           displaySelectDevice(recipes)
@@ -322,7 +326,7 @@ function closeTag() {
           displaySelectUstensils(recipes)
           displayAllRecipes(recipes)
         } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
+          sortRecipesByTag(arrayTag, recipes)
         }
       })
     }
@@ -338,14 +342,13 @@ function closeTag() {
         if (item.id === tagDevice.id) {
           tagDevice.remove()
         }
-        console.log("appareil",arrayTag);
         if (arrayTag.length === 0) {
           displaySelectDevice(recipes)
           displaySelectIngredients(recipes)
           displaySelectUstensils(recipes)
           displayAllRecipes(recipes)
         } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
+          sortRecipesByTag(arrayTag, recipes)
         }
       })
     }
@@ -360,15 +363,14 @@ function closeTag() {
         if (item.id === tagUstensil.id) {
           tagUstensil.remove()
         }
- 
-        console.log("ustensil",arrayTag);
+
         if (arrayTag.length === 0) {
           displaySelectDevice(recipes)
           displaySelectIngredients(recipes)
           displaySelectUstensils(recipes)
           displayAllRecipes(recipes)
         } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-          sortRecipesByTag(arrayTag)
+          sortRecipesByTag(arrayTag, recipes)
         }
       })
     }
@@ -385,10 +387,10 @@ function displayRecipesBySearchInput() {
     const valueInput = e.target.value.toLowerCase() //récupération de la valeur de l'input
     
     if (valueInput.length > 2) {
+      console.log("valueInput", valueInput);
       containerArticleRecipes.innerHTML = "" //vide le dom des recettes
         const filterRecipes = recipes.filter(recipe => {
           let filterIngredient = false 
-      
           for (const item of recipe.ingredients) {
             const ingredient = item.ingredient.toLowerCase();
             if (ingredient.includes(valueInput)) {
@@ -419,10 +421,14 @@ function displayRecipesBySearchInput() {
       displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
       
       /////// pour relancer le tri par tag quand l'user a déjà filtré par searchbar
-      //sortRecipesByTag() //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
-    
+      //sortRecipesByTag(tagSelect) //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
+      //sortRecipesByTag(tagSelect, filterRecipes)
       
-    
+      //displayTag()
+
+      
+      
+//else if (valueInput.length > 2 && change sur un select) -> 
     } else {
       displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres");
