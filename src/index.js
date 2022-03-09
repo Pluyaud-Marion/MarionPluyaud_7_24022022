@@ -210,7 +210,6 @@ function displayTag() {
       closeTag()
     })
   }
-  
 }
 
 /*
