@@ -338,19 +338,21 @@ function closeTag() {
   }
 }
 
+
 function displayRecipesBySearchInput() {
   const searchBar = document.querySelector(".search")
   const selectUstensils = document.getElementById("ustensils");
   const selectDevices = document.getElementById("devices");
   const selectIngredients = document.getElementById("ingredients")
+  let filterRecipes = []
 
   searchBar.addEventListener("input", e => {
     const valueInput = e.target.value.toLowerCase() //récupération de la valeur de l'input
     
     if (valueInput.length > 2) {
-      console.log("valueInput", valueInput);
+    
       containerArticleRecipes.innerHTML = "" //vide le dom des recettes
-        const filterRecipes = recipes.filter(recipe => {
+          filterRecipes = recipes.filter(recipe => {
           let filterIngredient = false 
           for (const item of recipe.ingredients) {
             const ingredient = item.ingredient.toLowerCase();
@@ -385,16 +387,14 @@ function displayRecipesBySearchInput() {
       //sortRecipesByTag(tagSelect) //rappel de la fonction qui trie par tag avec en paramètre filterRecipes -> le nouveau tableau filtré par barre de recherche
       //sortRecipesByTag(tagSelect, filterRecipes)
       
-      //displayTag()
-
-      
-      
-//else if (valueInput.length > 2 && change sur un select) -> 
+      if (filterRecipes.length === 0) {
+        containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
+      }
+       
     } else {
       displayAllRecipes(recipes)
-      console.log("il n'y a pas 3 lettres");
+      console.log("il n'y a pas 3 lettres")
     }
-    
   })
 }
 

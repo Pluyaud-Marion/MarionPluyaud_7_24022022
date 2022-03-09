@@ -156,6 +156,7 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  font-family: 'Lato', sans-serif;
 }
 
 .container-article .article-recipe {
