@@ -205,7 +205,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
-      sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
+      sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
      
       closeTag()
     })
@@ -216,7 +216,7 @@ function displayTag() {
 /*
 Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
 */
-function sortRecipesByTag(tagSelect) {
+function sortRecipesByTag(recipes) {
   let allRecipes = []
   let filterDevice = ""
   let filterIngredient = ""
@@ -332,7 +332,7 @@ function closeTag() {
         displaySelectUstensils(recipes)
         displayAllRecipes(recipes)
       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-        sortRecipesByTag(tagSelect)
+        sortRecipesByTag(recipes)
       }
 
     })
@@ -374,7 +374,8 @@ function searchByInput() {
       }
       console.log(newArrayRecipes);
   
-      displayAllRecipes(newArrayRecipes)
+      displayAllRecipes(newArrayRecipes) 
+      
 
       selectUstensils.innerHTML = ""
       const optionUstensils = document.createElement("option")
@@ -394,9 +395,28 @@ function searchByInput() {
       optionIngredients.innerHTML = "Ingredients"
       displaySelectIngredients(newArrayRecipes)
 
+
+      /*
+      recherche sur barre de recherche d'abord puis avec les tags
+      Ecouteur sur les balises select + au change appel de la fonction tri
+      */
+      const selectAll = [selectIngredients, selectDevices, selectUstensils ]
+      for (const select of selectAll){
+        select.addEventListener('change', () => {
+          sortRecipesByTag(newArrayRecipes)
+        })
+      }
+      
+      /*
+      recherche sur tags d'abord puis sur barre de recherche
+      */
+      sortRecipesByTag(newArrayRecipes)
+
       if (newArrayRecipes.length === 0) {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
       }
+     
+
     } else {
       displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres");
