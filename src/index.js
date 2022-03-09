@@ -12,7 +12,6 @@ displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
-//closeTag()
 }
 
 function displayAllRecipes(recipes) {
@@ -208,7 +207,6 @@ function displayTag() {
       sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
      
       closeTag()
-      //console.log("tagSelect dans display tag",tagSelect);
     })
   }
   
@@ -287,9 +285,6 @@ function sortRecipesByTag(tagSelect) {
   optionUstensil.innerHTML = "Ustensiles"
   displaySelectUstensils(allRecipes)
 
-  //closeTag()
-  
-
 }
 
 /*
@@ -319,7 +314,6 @@ function closeTag() {
           tagDevice.remove()
           let index = tagSelect.indexOf(tagDevice.id) //dans le tableau récupération de l'index de l'élément cliqué
           tagSelect.splice(index, 1) //suppression de cet élément par son index
-          console.log("index", index);
         }
       }
       for (const tagUstensil of tagsUstensils) {
@@ -327,13 +321,11 @@ function closeTag() {
           tagUstensil.remove()
           let index = tagSelect.indexOf(tagUstensil.id) //dans le tableau récupération de l'index de l'élément cliqué
           tagSelect.splice(index, 1) //suppression de cet élément par son index
-          console.log("index", index);
         }
       }
       
       //si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
       if (tagSelect.length === 0) {
-        console.log("vide");
         displaySelectDevice(recipes)
         displaySelectIngredients(recipes)
         displaySelectUstensils(recipes)
