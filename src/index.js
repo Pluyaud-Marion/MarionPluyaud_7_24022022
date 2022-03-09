@@ -204,7 +204,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
-      sortRecipesByTag(tagSelect) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
+      sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
      
       closeTag()
     })
@@ -215,7 +215,7 @@ function displayTag() {
 /*
 Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
 */
-function sortRecipesByTag(tagSelect) {
+function sortRecipesByTag(recipes) {
   let allRecipes = []
   let filterDevice = ""
   let filterIngredient = ""
@@ -331,7 +331,7 @@ function closeTag() {
         displaySelectUstensils(recipes)
         displayAllRecipes(recipes)
       } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
-        sortRecipesByTag(tagSelect)
+        sortRecipesByTag(recipes)
       }
 
     })
