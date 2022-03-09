@@ -2,7 +2,7 @@ import recipes from "./recipes.js" // import de l'ensemble de la constante
 
 const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
 const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
-const selectDevice = document.getElementById("devices")
+const selectDevices = document.getElementById("devices")
 const filter = document.querySelector(".filter-tag")
 const containerArticleRecipes = document.querySelector(".container-article")
 
@@ -162,7 +162,7 @@ function displaySelectDevice(recipes) {
 
   for (const device of arrayDeviceFinish) {
     const tagOptionDevice = document.createElement("option")
-    selectDevice.appendChild(tagOptionDevice)
+    selectDevices.appendChild(tagOptionDevice)
     tagOptionDevice.innerHTML = device
     tagOptionDevice.value = device
   }
@@ -174,7 +174,7 @@ let tagSelect = []
 Fonction qui gère la construction des éléments des tags et leur affichage dans le dom
 */
 function displayTag() {
-  const selectAll = [selectIngredients, selectDevice, selectUstensils ]
+  const selectAll = [selectIngredients, selectDevices, selectUstensils ]
 
   const divTag = document.createElement("div");
   filter.prepend(divTag)
@@ -267,10 +267,10 @@ function sortRecipesByTag(recipes) {
   containerArticleRecipes.innerHTML = ""
   displayAllRecipes(allRecipes)
 
-  selectDevice.innerHTML = ""
+  selectDevices.innerHTML = ""
   const optionDevice = document.createElement("option")
   optionDevice.innerHTML = "Appareils"
-  selectDevice.prepend(optionDevice)
+  selectDevices.prepend(optionDevice)
   displaySelectDevice(allRecipes)
 
   selectIngredients.innerHTML = ""
