@@ -2,7 +2,7 @@ import recipes from "./recipes.js" // import de l'ensemble de la constante
 
 const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
 const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
-const selectDevice = document.getElementById("devices")
+const selectDevices = document.getElementById("devices")
 const filter = document.querySelector(".filter-tag")
 const containerArticleRecipes = document.querySelector(".container-article")
 
@@ -12,6 +12,7 @@ displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
+searchByInput()
 }
 
 function displayAllRecipes(recipes) {
@@ -161,7 +162,7 @@ function displaySelectDevice(recipes) {
 
   for (const device of arrayDeviceFinish) {
     const tagOptionDevice = document.createElement("option")
-    selectDevice.appendChild(tagOptionDevice)
+    selectDevices.appendChild(tagOptionDevice)
     tagOptionDevice.innerHTML = device
     tagOptionDevice.value = device
   }
@@ -173,7 +174,7 @@ let tagSelect = []
 Fonction qui gère la construction des éléments des tags et leur affichage dans le dom
 */
 function displayTag() {
-  const selectAll = [selectIngredients, selectDevice, selectUstensils ]
+  const selectAll = [selectIngredients, selectDevices, selectUstensils ]
 
   const divTag = document.createElement("div");
   filter.prepend(divTag)
@@ -267,10 +268,10 @@ function sortRecipesByTag(tagSelect) {
   containerArticleRecipes.innerHTML = ""
   displayAllRecipes(allRecipes)
 
-  selectDevice.innerHTML = ""
+  selectDevices.innerHTML = ""
   const optionDevice = document.createElement("option")
   optionDevice.innerHTML = "Appareils"
-  selectDevice.prepend(optionDevice)
+  selectDevices.prepend(optionDevice)
   displaySelectDevice(allRecipes)
 
   selectIngredients.innerHTML = ""
@@ -336,6 +337,71 @@ function closeTag() {
 
     })
   }
+}
+
+/////////// Fonction de recherche par barre de recherche avec boucles uniquement ////////
+function searchByInput() {
+  const searchBar = document.querySelector(".search")
+
+  searchBar.addEventListener("input", e => {
+    const valueInput = e.target.value.toLowerCase()
+    let newArrayRecipes = []
+
+
+    if (valueInput.length > 2) {
+      containerArticleRecipes.innerHTML = ""
+      for (const recipe of recipes) {
+        const name = recipe.name.toLowerCase()
+        if (name.includes(valueInput)) {
+          if (!newArrayRecipes.includes(recipe)) {
+            newArrayRecipes.push(recipe)
+          }
+        }
+        const description = recipe.description.toLowerCase()
+        if(description.includes(valueInput)) {
+          if (!newArrayRecipes.includes(recipe)) {
+            newArrayRecipes.push(recipe)
+          }
+        }
+        const ingredients = recipe.ingredients
+        for (const ingredient of ingredients) {
+          if(ingredient.ingredient.toLowerCase().includes(valueInput)) {
+            if (!newArrayRecipes.includes(recipe)) {
+              newArrayRecipes.push(recipe)
+            }
+          }
+        }
+      }
+      console.log(newArrayRecipes);
+  
+      displayAllRecipes(newArrayRecipes)
+
+      selectUstensils.innerHTML = ""
+      const optionUstensils = document.createElement("option")
+      selectUstensils.appendChild(optionUstensils)
+      optionUstensils.innerHTML = "Ustensiles"
+      displaySelectUstensils(newArrayRecipes) 
+
+      selectDevices.innerHTML = ""  //vide le select devices
+      const optionDevices = document.createElement('option')
+      selectDevices.appendChild(optionDevices)
+      optionDevices.innerHTML = "Appareils"
+      displaySelectDevice(newArrayRecipes)
+
+      selectIngredients.innerHTML = ""  //vide le select ingredients
+      const optionIngredients = document.createElement('option')
+      selectIngredients.appendChild(optionIngredients)
+      optionIngredients.innerHTML = "Ingredients"
+      displaySelectIngredients(newArrayRecipes)
+
+      if (newArrayRecipes.length === 0) {
+        containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
+      }
+    } else {
+      displayAllRecipes(recipes)
+      console.log("il n'y a pas 3 lettres");
+    }
+  })
 }
 
 main()
