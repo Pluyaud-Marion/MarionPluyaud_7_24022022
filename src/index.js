@@ -13,8 +13,6 @@ displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
 displayTag()
 displayRecipesBySearchInput()
-
-
 }
 
 function displayAllRecipes(recipes) {
@@ -384,9 +382,23 @@ function displayRecipesBySearchInput() {
       optionIngredients.innerHTML = "Ingredients"
       displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
     
-      sortRecipesByTag(filterRecipes) 
-      console.log("filterRecipes", filterRecipes);
 
+      /*
+      recherche sur barre de recherche d'abord puis avec les tags
+      Ecouteur sur les balises select + au change appel de la fonction tri
+      */
+      const selectAll = [selectIngredients, selectDevices, selectUstensils ]
+      for (const select of selectAll){
+        select.addEventListener('change', () => {
+          sortRecipesByTag(filterRecipes)
+        })
+      }
+      
+      /*
+      recherche sur tags d'abord puis sur barre de recherche
+      */
+      sortRecipesByTag(filterRecipes)
+      
       if (filterRecipes.length === 0) {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
       }
