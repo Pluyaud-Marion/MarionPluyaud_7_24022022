@@ -1,11 +1,15 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
-const selectIngredients = document.getElementById("ingredients") // récupère la balise select (sans options)
-const selectUstensils = document.getElementById("ustensils") // récupère le select avec id ustensils
+const selectIngredients = document.getElementById("ingredients") 
+const selectUstensils = document.getElementById("ustensils") 
 const selectDevices = document.getElementById("devices")
 const filter = document.querySelector(".filter-tag")
 const containerArticleRecipes = document.querySelector(".container-article")
+let tagSelect = []
 
+/**
+ *  Main function calling all functions at loading page
+ */
 function main() {
 displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
@@ -15,6 +19,11 @@ displayTag()
 displayRecipesBySearchInput()
 }
 
+/**
+ * Build DOM recipes cards and display recipes (all or filtered) based on params
+ * Accessibility
+ * @param {array} recipes - allRecipes or recipes filtered 
+ */
 function displayAllRecipes(recipes) {
   const containerArticle = document.querySelector(".container-article")
 
@@ -111,28 +120,27 @@ function displayAllRecipes(recipes) {
 }
 
 
+/**
+ * Build DOM select ingredient and display select ingredient based on params (all select ingredient if all recipes / select ingredient filtered if recipes filtered)
+ * Accessibility
+ * @param {array} recipes - allRecipes or recipes filtered 
+ */
 function displaySelectIngredients(recipes) {
-  const ingredientArray = [] //défini tableau d'ingrédients vide
-  let arrayIngredientFinish = [] //défini tableau final vide
+  const ingredientArray = [] 
+  let arrayIngredientFinish = [] 
 
-
-  // boucle sur les recettes
   for (const recipe of recipes){
-    const ingredientsElement = recipe.ingredients //récupère des tableaux avec tous les éléments d'une recette
-  
-    //boucle sur chaque ingrédients des tableaux
+    const ingredientsElement = recipe.ingredients 
     for (const ingredient of ingredientsElement) {
-      const ingredientsAll = ingredient.ingredient //récupère tous les ingrédients individuellement
-      ingredientArray.push(ingredientsAll.toLowerCase()) //insère dans tableau ingredientArray chaque ingrédient, en minuscule
+      const ingredientsAll = ingredient.ingredient 
+      ingredientArray.push(ingredientsAll.toLowerCase())
       const uniqueSet = new Set(ingredientArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
       arrayIngredientFinish = Array.from(uniqueSet)// conversion de uniqueSet en tableau
-
-     // filterArray = ingredientArray.filter((ingredient, index) => ingredientArray.indexOf(ingredient) !== index)
     }
   }
-  //boucle sur chaque élément du tableau trié pour créer les balises option et insérer les éléments
+  
   for (const element of arrayIngredientFinish) {
-    const tagOptionIngredient = document.createElement("option") //créé une balise option pour chaque ingrédient
+    const tagOptionIngredient = document.createElement("option") 
     selectIngredients.appendChild(tagOptionIngredient)
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
@@ -140,22 +148,24 @@ function displaySelectIngredients(recipes) {
   }
 }
 
-
+/**
+ * Build DOM select ustensils and display select ustensils based on params (all select ustensils if all recipes / select ustensils filtered if recipes filtered)
+ * Accessibility
+ * @param {array} recipes - allRecipes or recipes filtered 
+ */
 function displaySelectUstensils(recipes) {
-  const ustensilArray = [] //défini tableau d'ustensils vide
-  let arrayUstensilFinish = [] //défini tableau final vide
+  const ustensilArray = [] 
+  let arrayUstensilFinish = [] 
 
-  //boucle sur chaque recette pour récupérer tous les ustensils
   for (const recipe of recipes){
     const ustensilsElement = recipe.ustensils
-    //pour chaque ustenstil = création nouveau tableau sans doublon
     for (const ustensils of ustensilsElement) {
-      ustensilArray.push(ustensils.toLowerCase()) // remplissage du tableau avec chaque ustensils : nom en minuscule
+      ustensilArray.push(ustensils.toLowerCase())
       const uniqueSet = new Set(ustensilArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
       arrayUstensilFinish = Array.from(uniqueSet) // conversion de uniqueSet en tableau
     }
   }
-  //pour chaque élément du nouveau tableau sans doublon : création balise option + ajout valeur
+
   for (const ustensil of arrayUstensilFinish) {
     const tagOptionUstensils = document.createElement("option") 
     selectUstensils.appendChild(tagOptionUstensils)
@@ -165,6 +175,11 @@ function displaySelectUstensils(recipes) {
   }
 }
 
+/**
+ * Build DOM select device and display select device based on params (all select device if all recipes / select device filtered if recipes filtered)
+ * Accessibility
+ * @param {array} recipes - allRecipes or recipes filtered 
+ */
 function displaySelectDevice(recipes) {
   const deviceArray = []
   let arrayDeviceFinish = [];
@@ -186,11 +201,12 @@ function displaySelectDevice(recipes) {
   }
 }
 
-let tagSelect = []
 
-/*
-Fonction qui gère la construction des éléments des tags et leur affichage dans le dom
-*/
+/**
+ * Build and display tags - Add in tagSelect (array) all tags selected
+ * Accessibility
+ * Call functions sortRecipesByTag() and closeTag()
+ */
 function displayTag() {
   const selectAll = [selectIngredients, selectDevices, selectUstensils ]
 
@@ -230,18 +246,18 @@ function displayTag() {
         divTagSpanImg.tabIndex = 1
         divTagSpanImg.ariaLabel = `filtre les recettes avec ustensil ${e.target.value}`
       }
-      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
-      
+      tagSelect.push(e.target.value) 
       sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
-      
       closeTag()
     })
   }
 }
 
-/*
-Fonction qui trie les recettes par tag + gère l'affichage des éléments restant dans les selects en fonction des tags choisis
-*/
+/**
+ * sort recipes by tag based on tag selected by user and return allRecipes (new array with recipes filtered)
+ * Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params allRecipes
+ * @param {array} recipes - allRecipes or recipes filtered 
+ */
 function sortRecipesByTag(recipes) {
   let allRecipes = []
   let filterDevice = ""
@@ -313,10 +329,10 @@ function sortRecipesByTag(recipes) {
   displaySelectUstensils(allRecipes)
 }
 
-/*
-Fonction pour fermer un tag au click sur la croix
-Tri à nouveau les recettes affichées + l'affichage des éléments des selects par rapport aux recettes restantes
-*/
+/**
+ * Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
+ * Update tagSelect array 
+ */
 function closeTag() {
   const close = document.getElementsByClassName("close-tag")
   
@@ -337,31 +353,28 @@ function closeTag() {
       for (const tagDevice of tagsDevices) {
         if (item.id === tagDevice.id) {
           tagDevice.remove()
-          let index = tagSelect.indexOf(tagDevice.id) //dans le tableau récupération de l'index de l'élément cliqué
-          tagSelect.splice(index, 1) //suppression de cet élément par son index
+          let index = tagSelect.indexOf(tagDevice.id) 
+          tagSelect.splice(index, 1) 
         }
       }
       for (const tagUstensil of tagsUstensils) {
         if (item.id === tagUstensil.id) {
           tagUstensil.remove()
-          let index = tagSelect.indexOf(tagUstensil.id) //dans le tableau récupération de l'index de l'élément cliqué
-          tagSelect.splice(index, 1) //suppression de cet élément par son index
+          let index = tagSelect.indexOf(tagUstensil.id) 
+          tagSelect.splice(index, 1) 
         }
       }
       
-      //si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
       if (tagSelect.length === 0) {
         displaySelectDevice(recipes)
         displaySelectIngredients(recipes)
         displaySelectUstensils(recipes)
         displayAllRecipes(recipes)
-      } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+      } else { 
         sortRecipesByTag(recipes)
       }
-
     })
   
-
     item.addEventListener("keydown", e => {
       item.focus()
       const tagsIngredients = document.querySelectorAll(".tag-ingredients")
@@ -369,45 +382,46 @@ function closeTag() {
       const tagsDevices = document.querySelectorAll(".tag-device")
       if (e.key === "Enter") {
         for (const tagIngredient of tagsIngredients) {
-          if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
+          if (item.id === tagIngredient.id) { 
             tagIngredient.remove()
-            let index = tagSelect.indexOf(tagIngredient.id) //dans le tableau récupération de l'index de l'élément cliqué
-            tagSelect.splice(index, 1) //suppression de cet élément par son index
+            let index = tagSelect.indexOf(tagIngredient.id) 
+            tagSelect.splice(index, 1) 
           }
         }
 
         for (const tagDevice of tagsDevices) {
           if (item.id === tagDevice.id) {
             tagDevice.remove()
-            let index = tagSelect.indexOf(tagDevice.id) //dans le tableau récupération de l'index de l'élément cliqué
-            tagSelect.splice(index, 1) //suppression de cet élément par son index
+            let index = tagSelect.indexOf(tagDevice.id)
+            tagSelect.splice(index, 1) 
           }
         }
         for (const tagUstensil of tagsUstensils) {
           if (item.id === tagUstensil.id) {
             tagUstensil.remove()
-            let index = tagSelect.indexOf(tagUstensil.id) //dans le tableau récupération de l'index de l'élément cliqué
-            tagSelect.splice(index, 1) //suppression de cet élément par son index
+            let index = tagSelect.indexOf(tagUstensil.id) 
+            tagSelect.splice(index, 1)
           }
         }
         
-        //si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
         if (tagSelect.length === 0) {
           displaySelectDevice(recipes)
           displaySelectIngredients(recipes)
           displaySelectUstensils(recipes)
           displayAllRecipes(recipes)
-        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+        } else { 
           sortRecipesByTag(recipes)
         }
       }
-
     })
   }
 }
 
-
-
+/**
+ * Sort recipes by search bar with FILTER - return filterRecipes (new array with recipes filtered) 
+ * Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params filterRecipes
+ * Add sortByTag
+ */
 function displayRecipesBySearchInput() {
   const searchBar = document.querySelector(".search")
   const selectUstensils = document.getElementById("ustensils");
@@ -417,10 +431,9 @@ function displayRecipesBySearchInput() {
 
   searchBar.addEventListener("input", e => {
     const valueInput = e.target.value.toLowerCase() //récupération de la valeur de l'input
-    
+
     if (valueInput.length > 2) {
-    
-      containerArticleRecipes.innerHTML = "" //vide le dom des recettes
+      containerArticleRecipes.innerHTML = "" 
           filterRecipes = recipes.filter(recipe => {
           let filterIngredient = false 
           for (const item of recipe.ingredients) {
@@ -434,25 +447,24 @@ function displayRecipesBySearchInput() {
       })
       displayAllRecipes(filterRecipes) // appelle à nouveau la fonction pour afficher les recettes avec en paramètre le nouveau tableau trié
 
-      selectUstensils.innerHTML = "" //vide le select ustenstils
+      selectUstensils.innerHTML = "" 
       const optionUstenstils = document.createElement('option')
       selectUstensils.appendChild(optionUstenstils)
       optionUstenstils.innerHTML = "Ustensiles"
-      displaySelectUstensils(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+      displaySelectUstensils(filterRecipes) 
 
-      selectDevices.innerHTML = ""  //vide le select devices
+      selectDevices.innerHTML = "" 
       const optionDevices = document.createElement('option')
       selectDevices.appendChild(optionDevices)
       optionDevices.innerHTML = "Appareils"
-      displaySelectDevice(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+      displaySelectDevice(filterRecipes) 
 
-      selectIngredients.innerHTML = ""  //vide le select ingredients
+      selectIngredients.innerHTML = "" 
       const optionIngredients = document.createElement('option')
       selectIngredients.appendChild(optionIngredients)
       optionIngredients.innerHTML = "Ingredients"
-      displaySelectIngredients(filterRecipes) //rappelle la fonction avec en paramètres le nouveau tableau filtré
+      displaySelectIngredients(filterRecipes) 
     
-
       /*
       recherche sur barre de recherche d'abord puis avec les tags
       Ecouteur sur les balises select + au change appel de la fonction tri
@@ -473,7 +485,6 @@ function displayRecipesBySearchInput() {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
       }
      
-
     } else {
       displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres")
