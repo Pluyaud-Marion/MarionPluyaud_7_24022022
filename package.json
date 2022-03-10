@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json",
     "sass": "sass --watch ./css/style.scss:./css/style.css"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "sass": "^1.49.8"
   },
   "devDependencies": {
-    "eslint": "^8.9.0"
+    "eslint": "^8.9.0",
+    "jsdoc": "^3.6.10"
   }
 }
