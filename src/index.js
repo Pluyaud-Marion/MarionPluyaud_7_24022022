@@ -22,10 +22,15 @@ function displayAllRecipes(recipes) {
     const tagArticle = document.createElement("article");
     containerArticle.appendChild(tagArticle)
     tagArticle.className = "article-recipe"
+    tagArticle.tabIndex = 0   
+    tagArticle.ariaLabel = "Recettes filtrées suite à la recherche dans la barre de recherche et/ou dans les tags"
 
     const tagImg = document.createElement("img")
     tagArticle.appendChild(tagImg)
     tagImg.src = "../assets/picture-recipe.jpg"
+    tagImg.alt = "image de fruits"
+    tagImg.ariaLabel = "image de fruits illustrant la recette"
+    tagImg.tabIndex = 0
 
     const tagContainer = document.createElement("div")
     tagArticle.appendChild(tagContainer)
@@ -35,6 +40,7 @@ function displayAllRecipes(recipes) {
     tagContainer.appendChild(h2)
     h2.className = "title"
     h2.innerHTML = recipe.name
+    h2.tabIndex = 0
 
     const tagContainerTime = document.createElement("div")
     tagContainer.appendChild(tagContainerTime)
@@ -43,11 +49,14 @@ function displayAllRecipes(recipes) {
     const tagI = document.createElement("i")
     tagContainerTime.appendChild(tagI)
     tagI.className = "far fa-clock"
+    tagI.tabIndex = 0
+    tagI.ariaLabel = "horloge pour illustrer le temps de cuisson"
 
     const tagSpanTime = document.createElement("span")
     tagContainerTime.appendChild(tagSpanTime)
     tagSpanTime.className = "time"
     tagSpanTime.innerHTML = recipe.time + " min"
+    tagSpanTime.tabIndex = 0
 
     const tagContainerInfos = document.createElement("div")
     tagArticle.appendChild(tagContainerInfos);
@@ -56,6 +65,7 @@ function displayAllRecipes(recipes) {
     const tagIngredient = document.createElement("div")
     tagContainerInfos.appendChild(tagIngredient)
     tagIngredient.className = "ingredient"
+    tagIngredient.tabIndex = 0
     
     const recipeIngredients = recipe.ingredients
     for (const ingredient of recipeIngredients) {
@@ -66,11 +76,13 @@ function displayAllRecipes(recipes) {
       const aliment = document.createElement("span");
       containerIngredient.appendChild(aliment)
       aliment.className = "aliment"
+      aliment.tabIndex = 0
 
       aliment.innerHTML = ingredient.ingredient
       const quantity = document.createElement("span")
       containerIngredient.appendChild(quantity)
       quantity.className = "quantity"
+      quantity.tabIndex = 0
 
       if(!ingredient.quantity) {
         quantity.innerHTML = ""
@@ -81,6 +93,7 @@ function displayAllRecipes(recipes) {
       const unit = document.createElement("span")
       containerIngredient.appendChild(unit)
       unit.className = "unit"
+      unit.tabIndex = 0
 
       if(!ingredient.unit) {
         unit.innerHTML = ""
@@ -93,8 +106,10 @@ function displayAllRecipes(recipes) {
     tagContainerInfos.appendChild(tagRecipe)
     tagRecipe.className = "infos-recipe"
     tagRecipe.innerHTML = recipe.description
+    tagRecipe.tabIndex = 0
   }
 }
+
 
 function displaySelectIngredients(recipes) {
   const ingredientArray = [] //défini tableau d'ingrédients vide
@@ -121,6 +136,7 @@ function displaySelectIngredients(recipes) {
     selectIngredients.appendChild(tagOptionIngredient)
     tagOptionIngredient.value = element
     tagOptionIngredient.innerHTML = element
+    tagOptionIngredient.ariaLabel = `sélectionner l'ingrédient ${element}`
   }
 }
 
@@ -145,6 +161,7 @@ function displaySelectUstensils(recipes) {
     selectUstensils.appendChild(tagOptionUstensils)
     tagOptionUstensils.innerHTML = ustensil
     tagOptionUstensils.value = ustensil
+    tagOptionUstensils.ariaLabel = `sélectionner l'ustensil ${ustensil}`
   }
 }
 
@@ -165,6 +182,7 @@ function displaySelectDevice(recipes) {
     selectDevices.appendChild(tagOptionDevice)
     tagOptionDevice.innerHTML = device
     tagOptionDevice.value = device
+    tagOptionDevice.ariaLabel = `sélectionner l'appareil ${device}`
   }
 }
 
@@ -192,16 +210,25 @@ function displayTag() {
       imgTag.src = "../assets/close-tag.png"
       imgTag.id = e.target.value //donne comme id à l'img le nom du tag
       imgTag.className = "close-tag"
+      imgTag.alt = "croix pour fermer le tag"
+      imgTag.ariaLabel = "icone d'une croix pour fermer le tag sélectionné"
+      imgTag.tabIndex = 1
 
       if (select.id === 'ingredients'){
         divTagSpanImg.className = 'tag-ingredients'
         divTagSpanImg.id = e.target.value
+        divTagSpanImg.tabIndex = 1
+        divTagSpanImg.ariaLabel = `filtre les recettes avec ingrédient ${e.target.value}`
       } else if (select.id === 'devices'){
         divTagSpanImg.className = 'tag-device'
         divTagSpanImg.id = e.target.value
+        divTagSpanImg.tabIndex = 1
+        divTagSpanImg.ariaLabel = `filtre les recettes avec appareil ${e.target.value}`
       } else if (select.id === 'ustensils'){
         divTagSpanImg.className = 'tag-ustensils'
         divTagSpanImg.id = e.target.value
+        divTagSpanImg.tabIndex = 1
+        divTagSpanImg.ariaLabel = `filtre les recettes avec ustensil ${e.target.value}`
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       
@@ -290,10 +317,9 @@ function sortRecipesByTag(recipes) {
 Fonction pour fermer un tag au click sur la croix
 Tri à nouveau les recettes affichées + l'affichage des éléments des selects par rapport aux recettes restantes
 */
-
 function closeTag() {
   const close = document.getElementsByClassName("close-tag")
-
+  
   for (const item of close) {
     item.addEventListener("click", () => {
       const tagsIngredients = document.querySelectorAll(".tag-ingredients")
@@ -334,8 +360,52 @@ function closeTag() {
       }
 
     })
+  
+
+    item.addEventListener("keydown", e => {
+      item.focus()
+      const tagsIngredients = document.querySelectorAll(".tag-ingredients")
+      const tagsUstensils = document.querySelectorAll(".tag-ustensils")
+      const tagsDevices = document.querySelectorAll(".tag-device")
+      if (e.key === "Enter") {
+        for (const tagIngredient of tagsIngredients) {
+          if (item.id === tagIngredient.id) { //si l'id de l'élément cliqué est le même que l'id de la croix cliqué -> on retire du dom la balise
+            tagIngredient.remove()
+            let index = tagSelect.indexOf(tagIngredient.id) //dans le tableau récupération de l'index de l'élément cliqué
+            tagSelect.splice(index, 1) //suppression de cet élément par son index
+          }
+        }
+
+        for (const tagDevice of tagsDevices) {
+          if (item.id === tagDevice.id) {
+            tagDevice.remove()
+            let index = tagSelect.indexOf(tagDevice.id) //dans le tableau récupération de l'index de l'élément cliqué
+            tagSelect.splice(index, 1) //suppression de cet élément par son index
+          }
+        }
+        for (const tagUstensil of tagsUstensils) {
+          if (item.id === tagUstensil.id) {
+            tagUstensil.remove()
+            let index = tagSelect.indexOf(tagUstensil.id) //dans le tableau récupération de l'index de l'élément cliqué
+            tagSelect.splice(index, 1) //suppression de cet élément par son index
+          }
+        }
+        
+        //si plus de tag = rappel de toutes les fonctions avec en paramètre le tableau de recettes d'origine
+        if (tagSelect.length === 0) {
+          displaySelectDevice(recipes)
+          displaySelectIngredients(recipes)
+          displaySelectUstensils(recipes)
+          displayAllRecipes(recipes)
+        } else { // sinon appel fonction tri par tag avec tableau des nouveaux tags
+          sortRecipesByTag(recipes)
+        }
+      }
+
+    })
   }
 }
+
 
 
 function displayRecipesBySearchInput() {
