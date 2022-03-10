@@ -18,23 +18,25 @@
 </head>
 
 <body>
-    <header class="logo-title">
-        <img src="assets/logo.png" alt="logo les petits plats">
+    <header role="banner" class="logo-title" tabindex="1">
+        <img src="assets/logo.png" alt="logo les petits plats" aria-label="logo les petits plats">
         <h1>Les petits plats</h1>
     </header>
 
-    <input class="search" type="search" placeholder="Rechercher une recette">
+    <input role="search" class="search" type="search" placeholder="Rechercher une recette"
+        aria-label="rechercher une recette">
 
     <div class="filter-tag">
 
         <div class="filter">
-            <select name="ingredient" id="ingredients">
+            <select name="ingredient" id="ingredients"
+                aria-label="sélectionner un ingrédient pour filtrer les recettes">
                 <option value="ingredient">Ingrédients</option>
             </select>
-            <select name="device" id="devices">
+            <select name="device" id="devices" aria-label="sélectionner un appareil pour filtrer les recettes">
                 <option value="device">Appareils</option>
             </select>
-            <select name="ustensil" id="ustensils">
+            <select name="ustensil" id="ustensils" aria-label="sélectionner un ustensil pour filtrer les recettes">
                 <option value="ustensil">Ustensiles</option>
             </select>
         </div>
