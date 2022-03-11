@@ -227,7 +227,7 @@ function displayTag() {
       spanTag.innerHTML = e.target.value
       let imgTag = document.createElement('img');
       divTagSpanImg.appendChild(imgTag)
-      imgTag.src = "../assets/close-tag.png"
+      imgTag.src = "./assets/close-tag.png"
       imgTag.id = e.target.value //donne comme id à l'img le nom du tag
       imgTag.className = "close-tag"
       imgTag.alt = "croix pour fermer le tag"
