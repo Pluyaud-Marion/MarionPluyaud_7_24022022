@@ -3,7 +3,7 @@ P7 - Développez un algorithme de recherche en JavaScript
 
 Ce repo a été réalisé dans le cadre d'un projet pour la formation DA Javascript React - Openclassrooms
 
-L'ensemble des recettes sont communiquées par l'entreprise sous forme de fichier JS = utilisation export/import sous forme de modules
+L'ensemble des recettes sont communiquées par l'entreprise sous forme de tableau JS = utilisation export/import de modules
 
 Fonctionnalités du site : 
 - **L'utilisateur doit pouvoir faire une recherche grâce à une barre de recherche en tapant au moins 3 lettres**
