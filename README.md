@@ -3,7 +3,7 @@ P7 - Développez un algorithme de recherche en JavaScript
 
 Ce repo a été réalisé dans le cadre d'un projet pour la formation DA Javascript React - Openclassrooms
 
-L'ensemble des recettes sont communiquées par l'entreprise sous forme de fichier JS = utilisation export/import sous forme de modules
+L'ensemble des recettes sont communiquées par l'entreprise sous forme de tableau JS = utilisation export/import de modules
 
 Fonctionnalités du site : 
 - **L'utilisateur doit pouvoir faire une recherche grâce à une barre de recherche en tapant au moins 3 lettres**
@@ -16,17 +16,18 @@ Fonctionnalités du site :
 = les cartes correspondant à la recherche doivent s'afficher et se mettre à jour
 
 Demandes du client : 
-Implémentation de 2 algorithmes différents pour la recherche principale
+Implémentation de 2 algorithmes différents pour la recherche principale et comparaison du plus performant pour retenir la meilleure solution
 
 Travail réalisé : 
 - Branche Master : contient la recherche par tag
-- Branche algorithme1 : contient la recherche principale `implémentée avec Filter`
-- Branche alogirthme2 : contient la recherche principale `implémentée avec des boucles for`
+- Branche algorithme1 : contient la recherche principale implémentée avec les méthodes de l'objet Array (Filter)
+- Branche algorithme2 : contient la recherche principale implémentée avec les boucles natives
 - Site accessible (navigation au clavier possible)
 - Site passé avec succès aux validateurs W3C et Achecker
 - Réalisation d'une documentation JSDoc : http://127.0.0.1:5500/docs/index.js.html
 - Réalisation d'un algorigramme : [algorigramme.pdf](https://github.com/Pluyaud-Marion/MarionPluyaud_7_24022022/files/8231171/algorigramme.pdf)
-- Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch)
+- Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch) 
+- Sélection de l'algorithme numéro 1 (méthodes de l'objet Array)
 
 
 Technologies utilisées : 
