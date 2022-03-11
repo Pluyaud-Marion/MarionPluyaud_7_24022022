@@ -93,22 +93,14 @@ function displayAllRecipes(recipes) {
       quantity.className = "quantity"
       quantity.tabIndex = 0
 
-      if(!ingredient.quantity) {
-        quantity.innerHTML = ""
-      } else {
-        quantity.innerHTML = " : "+`${ingredient.quantity}`
-      }
-      
+      quantity.innerHTML = !ingredient.quantity ? "" : " : "+`${ingredient.quantity}`
+
       const unit = document.createElement("span")
       containerIngredient.appendChild(unit)
       unit.className = "unit"
       unit.tabIndex = 0
 
-      if(!ingredient.unit) {
-        unit.innerHTML = ""
-      } else {
-        unit.innerHTML = ingredient.unit
-      }
+      unit.innerHTML = !ingredient.unit ? '' : ingredient.unit
     }
     
     const tagRecipe = document.createElement("div")
@@ -433,23 +425,17 @@ function searchByInput() {
       containerArticleRecipes.innerHTML = ""
       for (const recipe of recipes) {
         const name = recipe.name.toLowerCase()
-        if (name.includes(valueInput)) {
-          if (!newArrayRecipes.includes(recipe)) {
-            newArrayRecipes.push(recipe)
-          }
+        if (name.includes(valueInput) && !newArrayRecipes.includes(recipe)) {
+          newArrayRecipes.push(recipe)
         }
         const description = recipe.description.toLowerCase()
-        if(description.includes(valueInput)) {
-          if (!newArrayRecipes.includes(recipe)) {
-            newArrayRecipes.push(recipe)
-          }
+        if(description.includes(valueInput) && !newArrayRecipes.includes(recipe)) {
+          newArrayRecipes.push(recipe)
         }
         const ingredients = recipe.ingredients
         for (const ingredient of ingredients) {
-          if(ingredient.ingredient.toLowerCase().includes(valueInput)) {
-            if (!newArrayRecipes.includes(recipe)) {
-              newArrayRecipes.push(recipe)
-            }
+          if(ingredient.ingredient.toLowerCase().includes(valueInput) && !newArrayRecipes.includes(recipe)) {
+            newArrayRecipes.push(recipe)
           }
         }
       }
