@@ -246,7 +246,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) 
       sortRecipesByTag(recipes) 
-      closeTag()
+      closeTag(recipes)
     })
   }
 }
@@ -330,8 +330,9 @@ function sortRecipesByTag(recipes) {
 /**
  * Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
  * Update tagSelect array 
+ * @param {array} recipes - allRecipes or recipes filtered
  */
-function closeTag() {
+function closeTag(recipes) {
   const close = document.getElementsByClassName("close-tag")
   
   for (const item of close) {
@@ -481,13 +482,10 @@ function searchByInput() {
       for (const select of selectAll){
         select.addEventListener('change', () => {
           sortRecipesByTag(newArrayRecipes)
+          closeTag(newArrayRecipes)
         })
       }
-      
-      /*
-      recherche sur tags d'abord puis sur barre de recherche
-      */
-      sortRecipesByTag(newArrayRecipes)
+    
 
       if (newArrayRecipes.length === 0) {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
