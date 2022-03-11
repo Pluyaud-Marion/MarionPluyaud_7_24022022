@@ -1,3 +1,3 @@
 # Les petits plats
 
-Algorithme réalisé avec Filter --> algorithme le plus performant (test sur Jsben.ch)
+Algorithme réalisé avec Filter --> algorithme sélectionné car plus performant 
