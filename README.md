@@ -27,7 +27,7 @@ Travail réalisé :
 - Réalisation d'une documentation JSDoc : https://pluyaud-marion.github.io/MarionPluyaud_7_24022022/docs/
 - Réalisation d'un algorigramme : [algorigramme.pdf](https://github.com/Pluyaud-Marion/MarionPluyaud_7_24022022/files/8231171/algorigramme.pdf)
 - Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch)
-(Benchmark.png)
+![Benchmark](Benchmark.png)
 - Sélection de l'algorithme numéro 1 (méthodes de l'objet Array)
 
 
