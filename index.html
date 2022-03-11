@@ -23,19 +23,23 @@
         <h1>Les petits plats</h1>
     </header>
 
-    <input role="search" class="search" type="search" placeholder="Rechercher une recette"
+    <label for="search" class="hidden">Tapez les premières lettres d'une recette pour lancer la recherche</label>
+    <input class="search" type="search" id="search" placeholder="Rechercher une recette"
         aria-label="rechercher une recette">
 
     <div class="filter-tag">
 
         <div class="filter">
+            <label for="ingredients" class="hidden">Sélectionner un ingredient</label>
             <select name="ingredient" id="ingredients"
                 aria-label="sélectionner un ingrédient pour filtrer les recettes">
                 <option value="ingredient">Ingrédients</option>
             </select>
+            <label for="devices" class="hidden">Sélectionner un appareil</label>
             <select name="device" id="devices" aria-label="sélectionner un appareil pour filtrer les recettes">
                 <option value="device">Appareils</option>
             </select>
+            <label for="ustensils" class="hidden">Sélectionner un ustensil</label>
             <select name="ustensil" id="ustensils" aria-label="sélectionner un ustensil pour filtrer les recettes">
                 <option value="ustensil">Ustensiles</option>
             </select>
