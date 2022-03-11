@@ -248,7 +248,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) 
       sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
-      closeTag()
+      closeTag(recipes)
     })
   }
 }
@@ -327,13 +327,15 @@ function sortRecipesByTag(recipes) {
   selectUstensils.prepend(optionUstensil)
   optionUstensil.innerHTML = "Ustensiles"
   displaySelectUstensils(allRecipes)
+
 }
 
 /**
  * Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
  * Update tagSelect array 
+ * @param {recipes} recipes - allRecipes or recipes filtered 
  */
-function closeTag() {
+function closeTag(recipes) {
   const close = document.getElementsByClassName("close-tag")
   
   for (const item of close) {
@@ -473,13 +475,9 @@ function displayRecipesBySearchInput() {
       for (const select of selectAll){
         select.addEventListener('change', () => {
           sortRecipesByTag(filterRecipes)
+          closeTag(filterRecipes)
         })
       }
-      
-      /*
-      recherche sur tags d'abord puis sur barre de recherche
-      */
-      sortRecipesByTag(filterRecipes)
       
       if (filterRecipes.length === 0) {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
