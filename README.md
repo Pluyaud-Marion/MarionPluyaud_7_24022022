@@ -24,9 +24,9 @@ Travail réalisé :
 - Branche algorithme2 : contient la recherche principale implémentée avec les boucles natives
 - Site accessible (navigation au clavier possible)
 - Site passé avec succès aux validateurs W3C et Achecker
-- Réalisation d'une documentation JSDoc : http://127.0.0.1:5500/docs/index.js.html
+- Réalisation d'une documentation JSDoc : https://pluyaud-marion.github.io/MarionPluyaud_7_24022022/docs/
 - Réalisation d'un algorigramme : [algorigramme.pdf](https://github.com/Pluyaud-Marion/MarionPluyaud_7_24022022/files/8231171/algorigramme.pdf)
-- Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch) 
+- Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch) [Benchmark](Benchmark.png)
 - Sélection de l'algorithme numéro 1 (méthodes de l'objet Array)
 
 
