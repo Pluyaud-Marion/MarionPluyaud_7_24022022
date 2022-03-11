@@ -24,7 +24,9 @@ Travail réalisé :
 - Branche alogirthme2 : contient la recherche principale `implémentée avec des boucles for`
 - Site accessible (navigation au clavier possible)
 - Site passé avec succès aux validateurs W3C et Achecker
-- Réalisation d'une documentation JSDoc : 
+- Réalisation d'une documentation JSDoc : http://127.0.0.1:5500/docs/index.js.html
+- Réalisation d'un algorigramme : [algorigramme.pdf](https://github.com/Pluyaud-Marion/MarionPluyaud_7_24022022/files/8231171/algorigramme.pdf)
+
 
 Technologies utilisées : 
 - HTML 
