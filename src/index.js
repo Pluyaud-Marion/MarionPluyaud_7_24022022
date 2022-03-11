@@ -246,7 +246,7 @@ function displayTag() {
       }
       tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
       sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
-      closeTag()
+      closeTag(recipes)
     })
   }
 }
@@ -331,8 +331,9 @@ function sortRecipesByTag(recipes) {
 /**
  * Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
  * Update tagSelect array 
+ * @param {array} recipes - allRecipes or recipes filtered
  */
-function closeTag() {
+function closeTag(recipes) {
   const close = document.getElementsByClassName("close-tag")
   
   for (const item of close) {
