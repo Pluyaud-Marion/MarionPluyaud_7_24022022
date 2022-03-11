@@ -92,22 +92,14 @@ function displayAllRecipes(recipes) {
       quantity.className = "quantity"
       quantity.tabIndex = 0
 
-      if(!ingredient.quantity) {
-        quantity.innerHTML = ""
-      } else {
-        quantity.innerHTML = " : "+`${ingredient.quantity}`
-      }
+      quantity.innerHTML = !ingredient.quantity ? "" : " : "+`${ingredient.quantity}`
       
       const unit = document.createElement("span")
       containerIngredient.appendChild(unit)
       unit.className = "unit"
       unit.tabIndex = 0
 
-      if(!ingredient.unit) {
-        unit.innerHTML = ""
-      } else {
-        unit.innerHTML = ingredient.unit
-      }
+      unit.innerHTML = !ingredient.unit ? '' : ingredient.unit
     }
     
     const tagRecipe = document.createElement("div")
