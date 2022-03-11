@@ -1,5 +1,8 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
+/**
+ * @file Documentation de la branche algorithme1 (Utilisation de Filter pour implémentation de l'algorithme) du projet Les petits plats.
+ */
 
 const selectIngredients = document.getElementById("ingredients") 
 const selectUstensils = document.getElementById("ustensils") 
