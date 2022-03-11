@@ -1,5 +1,6 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
+
 const selectIngredients = document.getElementById("ingredients") 
 const selectUstensils = document.getElementById("ustensils") 
 const selectDevices = document.getElementById("devices")
