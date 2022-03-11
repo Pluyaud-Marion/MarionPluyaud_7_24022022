@@ -40,7 +40,7 @@ function displayAllRecipes(recipes) {
 
     const tagImg = document.createElement("img")
     tagArticle.appendChild(tagImg)
-    tagImg.src = "../assets/picture-recipe.jpg"
+    tagImg.src = "../picture-recipe.jpg"
     tagImg.alt = "image de fruits"
     tagImg.ariaLabel = "image de fruits illustrant la recette"
     tagImg.tabIndex = 0
