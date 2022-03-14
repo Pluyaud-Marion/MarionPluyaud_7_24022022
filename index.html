@@ -24,12 +24,53 @@
         <h1>Les petits plats</h1>
     </header>
 
-    <label for="search" class="hidden">Tapez les premières lettres d'une recette pour lancer la recherche</label>
+    <label for="search">Tapez les premières lettres d'une recette pour lancer la recherche</label>
     <input class="search" type="search" id="search" placeholder="Rechercher une recette"
         aria-label="rechercher une recette">
 
     <div class="filter-tag">
+        <div class="tag"></div>
+        <div class="filter">
+            <div class="container-input-ingredients">
+                <input type="search" placeholder="Ingrédients" id="ingredients">
+                <i class="fas fa-chevron-down" id="chevron-ingredient"></i>
+                <ul class="list-ingredients"></ul>
+            </div>
+            <div class="container-input-devices">
+                <input type="search" placeholder="Appareils" id="devices">
+                <i class="fas fa-chevron-down" id="chevron-device"></i>
+                <ul class="list-devices"></ul>
+            </div>
+            <div class="container-input-ustensils">
+                <input type="search" placeholder="Ustensiles" id="ustensils">
+                <i class="fas fa-chevron-down" id="chevron-ustensil"></i>
+                <ul class="list-ustensils"></ul>
+            </div>
+        </div>
 
+    </div>
+
+    <!-- <div class="filter-tag">
+        <div class="filter">
+            <label for="inputIngredient">sélectionner un ingrédient pour filtrer les recettes</label>
+            <input type="search" list="ingredients" id="inputIngredient" placeholder="Ingrédients">
+            <datalist id="ingredients">
+             
+            </datalist>
+            <label for="inputDevice">sélectionner un appareil pour filtrer les recettes</label>
+            <input type="search" list="devices" id="inputDevice" placeholder="Appareils">
+            <datalist id="devices">
+              
+            </datalist>
+            <label for="inputUstensil">sélectionner un ustensil pour filtrer les recettes</label>
+            <input type="search" list="ustensils" id="inputUstensil" placeholder="Ustensiles">
+            <datalist id="ustensils">
+              
+            </datalist>
+        </div>
+    </div> -->
+
+    <!-- <div class="filter-tag">
         <div class="filter">
             <label for="ingredients" class="hidden">Sélectionner un ingredient</label>
             <select name="ingredient" id="ingredients"
@@ -45,8 +86,7 @@
                 <option value="ustensil">Ustensiles</option>
             </select>
         </div>
-    </div>
-
+    </div> -->
     <div class="container-article">
 
         <!-- <article class="article-recipe">
