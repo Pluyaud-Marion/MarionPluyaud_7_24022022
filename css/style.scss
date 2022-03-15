@@ -7,7 +7,7 @@ label{
     display: none;
 }
 .logo-title {
-    margin: 5% auto;
+    margin: 3% auto;
     h1 {
         font-family: 'DM Sans', sans-serif;
         color: $title-color;
@@ -36,13 +36,12 @@ label{
 }
 .tag {
     display: flex;
-    margin: 3% 0%;
+    margin: 2% 0%;
     width: 100%;
     .tag-ingredients {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        // background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #3282F7;
         padding-left: 1%;
         padding-right: 1%;
@@ -53,12 +52,15 @@ label{
         color: white;
         width: 12%;
         height: 40px;
+        font-size: 20px;
+        .close-tag{
+            width: 17%;
+        }
     }
     .tag-ustensils {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        // background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         padding-left: 1%;
         padding-right: 1%;
         margin-right: 2%;
@@ -69,12 +71,15 @@ label{
         width: 12%;
         height: 40px;
         background-color: #ED6454;
+        font-size: 20px;
+        .close-tag{
+            width: 17%;
+        }
     }
     .tag-device {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        // background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #68D9A4;
         padding-left: 1%;
         padding-right: 1%;
@@ -85,10 +90,14 @@ label{
         color: white;
         width: 12%;
         height: 40px;
+        font-size: 20px;
+        .close-tag{
+            width: 17%;
+        }
     }
 }
 .filter {
-    margin-top: 3%;
+    margin-top: 1%;
     margin-bottom: 3%;
     display: flex;
     width: 45%;
@@ -98,6 +107,7 @@ label{
         flex-direction: column;
         background-color: #3282F7;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
@@ -105,9 +115,18 @@ label{
         height: 50px;
         align-items: center;
         margin-right: 5%;
-        input{
-        background-color: #3282F7;
-        border: none;
+        .container-input-ing{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            width: 100%;
+            input{
+            background-color: #3282F7;
+            border: none;
+            font-size: 18px;
+            // width: 100%;
+            // margin-right: 5%;
+            }
         }
         .list-ingredients {
             background-color: #3282F7;
@@ -122,7 +141,8 @@ label{
                 font-family: 'Lato', sans-serif;
                 width: 30%;
                 list-style: none;
-                line-height: 30px;
+                line-height: 28px;
+                font-size: 16px;
             }
 
         }
@@ -132,6 +152,7 @@ label{
         flex-direction: column;
         background-color: #ED6454;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
@@ -139,9 +160,16 @@ label{
         height: 50px;
         align-items: center;
         margin-right: 5%;
-        input{
-            background-color: #ED6454;
-            border: none;
+        .container-input-ust{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            width: 100%;
+            input{
+                background-color: #ED6454;
+                border: none;
+                font-size: 18px;
+            }
         }
         .list-ustensils {
             background-color: #ED6454;
@@ -155,7 +183,8 @@ label{
                 font-family: 'Lato', sans-serif;
                 width: 30%;
                 list-style: none;
-                line-height: 30px;
+                line-height: 28px;
+                font-size: 16px;
             }
         }
     }
@@ -164,6 +193,7 @@ label{
         flex-direction: column;
         background-color: #68D9A4;
         padding-left: 1%;
+        padding-right: 1%;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
@@ -171,9 +201,16 @@ label{
         height: 50px;
         align-items: center;
         margin-right: 5%;
-        input{
-            background-color: #68D9A4;
-            border: none;
+        .container-input-dev{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            width: 100%;
+            input {
+                background-color: #68D9A4;
+                border: none;
+                font-size: 18px;
+            }
         }
         .list-devices {
             background-color: #68D9A4;
@@ -187,7 +224,8 @@ label{
                 font-family: 'Lato', sans-serif;
                 width: 30%;
                 list-style: none;
-                line-height: 30px;
+                line-height: 28px;
+                font-size: 16px;
             }
         }
 
@@ -196,17 +234,17 @@ label{
         color: white;
     }
     // #ingredients {
-    #inputIngredient {
-        background-color: #3282F7;
-    }
-    // #devices {
-    #inputDevice {
-        background-color: #68D9A4;
-    }
-    // #ustensils {
-    #inputUstensil {
-        background-color: #ED6454;
-    }
+    // #inputIngredient {
+    //     background-color: #3282F7;
+    // }
+    // // #devices {
+    // #inputDevice {
+    //     background-color: #68D9A4;
+    // }
+    // // #ustensils {
+    // #inputUstensil {
+    //     background-color: #ED6454;
+    // }
 }
 .container-article{
     justify-content: space-between;
