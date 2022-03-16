@@ -76,6 +76,7 @@ label {
 
 .tag .tag-ingredients .close-tag {
   width: 17%;
+  cursor: pointer;
 }
 
 .tag .tag-ustensils {
@@ -103,6 +104,7 @@ label {
 
 .tag .tag-ustensils .close-tag {
   width: 17%;
+  cursor: pointer;
 }
 
 .tag .tag-device {
@@ -130,6 +132,7 @@ label {
 
 .tag .tag-device .close-tag {
   width: 17%;
+  cursor: pointer;
 }
 
 .filter {
@@ -145,6 +148,7 @@ label {
 }
 
 .filter .container-input-ingredients {
+  cursor: pointer;
   border: none;
   display: block;
   background-color: #3282F7;
@@ -200,6 +204,7 @@ label {
 }
 
 .filter .container-input-ustensils {
+  cursor: pointer;
   display: block;
   background-color: #ED6454;
   font-family: 'Lato', sans-serif;
@@ -255,6 +260,7 @@ label {
 }
 
 .filter .container-input-devices {
+  cursor: pointer;
   display: block;
   background-color: #68D9A4;
   font-family: 'Lato', sans-serif;
