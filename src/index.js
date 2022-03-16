@@ -1,26 +1,40 @@
 import recipes from "./recipes.js" // import de l'ensemble de la constante
 
-const selectIngredients = document.getElementById("ingredients")
-const selectUstensils = document.getElementById("ustensils") 
-const selectDevices = document.getElementById("devices")
-const filter = document.querySelector(".filter-tag")
+/**
+ * @file Documentation de la branche algorithme1 (Utilisation de Filter pour implémentation de l'algorithme) du projet Les petits plats.
+ */
+
 const containerArticleRecipes = document.querySelector(".container-article")
+const inputDevice = document.getElementById("devices")
+const inputUstensil = document.getElementById("ustensils")
+const inputIngredient = document.getElementById("ingredients")
+const ulDevices = document.querySelector('.list-devices')
+const ulUstensils = document.querySelector('.list-ustensils')
+const ulIngredients = document.querySelector('.list-ingredients')
 let tagSelect = []
+let arrayDevices = []
+let arrayIngredients = []
+let arrayUstensils = []
 
 /**
- * Main function calling all functions at loading page
+ *  Main function calling all functions at loading page
  */
 function main() {
 displayAllRecipes(recipes)
 displaySelectIngredients(recipes)
 displaySelectUstensils(recipes)
 displaySelectDevice(recipes)
+toogleDevices()
+toogleUstensils()
+toogleIngredients()
 displayTag()
+searchInIngredients(arrayIngredients)
+searchInUstensils(arrayUstensils)
+searchInDevices(arrayDevices)
 }
 
 /**
- * Build DOM recipes cards and display recipes (all or filtered) based on params  
- * Accessibility
+ * Build DOM recipes cards and display recipes (all or filtered) based on params
  * @param {array} recipes - allRecipes or recipes filtered 
  */
 function displayAllRecipes(recipes) {
@@ -101,7 +115,6 @@ function displayAllRecipes(recipes) {
 
       unit.innerHTML = !ingredient.unit ? '' : ingredient.unit
     }
-    
     const tagRecipe = document.createElement("div")
     tagContainerInfos.appendChild(tagRecipe)
     tagRecipe.className = "infos-recipe"
@@ -111,141 +124,352 @@ function displayAllRecipes(recipes) {
 }
 
 /**
- * Build DOM select ingredient and display select ingredient based on params (all select ingredient if all recipes / select ingredient filtered if recipes filtered)
- * Accessibility
+ * Build DOM and display li ingredients. Based on params (all li ingredients if all recipes / li ingredients filtered if recipes filtered)
+ * sort by alphabetical order and remove duplicates li
  * @param {array} recipes - allRecipes or recipes filtered 
  */
-function displaySelectIngredients(recipes) {
-  const ingredientArray = [] //défini tableau d'ingrédients vide
-  let arrayIngredientFinish = [] //défini tableau final vide
 
-  // boucle sur les recettes
+ function displaySelectIngredients(recipes) {
+  const ingredientArray = [] 
+  let arrayIngredientFinish = [] 
+
   for (const recipe of recipes){
     const ingredientsElement = recipe.ingredients 
     for (const ingredient of ingredientsElement) {
       const ingredientsAll = ingredient.ingredient 
-      ingredientArray.push(ingredientsAll.toLowerCase()) 
+      ingredientArray.push(ingredientsAll.toLowerCase())
       const uniqueSet = new Set(ingredientArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
       arrayIngredientFinish = Array.from(uniqueSet)// conversion de uniqueSet en tableau
     }
   }
+  const containerInputIngredient = document.querySelector(".container-input-ingredients")
+  containerInputIngredient.appendChild(ulIngredients)
   
+  arrayIngredientFinish.sort()
   for (const element of arrayIngredientFinish) {
-    const tagOptionIngredient = document.createElement("option") 
-    selectIngredients.appendChild(tagOptionIngredient)
-    tagOptionIngredient.value = element
+    const tagOptionIngredient = document.createElement("li") 
+    ulIngredients.appendChild(tagOptionIngredient)
     tagOptionIngredient.innerHTML = element
+    tagOptionIngredient.className = "element-ingredient"
     tagOptionIngredient.ariaLabel = `sélectionner l'ingrédient ${element}`
   }
+  searchInIngredients(arrayIngredientFinish)
 }
 
 /**
- * Build DOM select ustensils and display select ustensils based on params (all select ustensils if all recipes / select ustensils filtered if recipes filtered)
- * Accessibility
- * @param {array} recipes - allRecipes or recipes filtered 
+ * Search function in li, with input search
+ * Call function displayTag() for display tag if user click li
+ * @param {array} arrayIngredients - allIngredients or ingredients filtered
+ */
+function searchInIngredients(arrayIngredients) {
+  const allElementsIngredients = document.querySelectorAll(".element-ingredient")
+  arrayIngredients = []
+  let newLi = []
+  for (const ingredient of allElementsIngredients) {
+    arrayIngredients.push(ingredient.innerHTML)
+  }
+  
+  inputIngredient.addEventListener("input", e => {
+    newLi = arrayIngredients.filter(li => li.includes(e.target.value.trim()))
+    ulIngredients.innerHTML = ""
+    for (const li of newLi) {
+      const tagLi = document.createElement("li")
+      ulIngredients.appendChild(tagLi)
+      tagLi.className = "element-ingredient"
+      tagLi.innerHTML = li
+    }
+    displayTag();
+  })
+}
+
+/**
+ * Function toogle div container-input-ingredients
+ */
+function toogleIngredients() {
+  const chevronIngredient = document.getElementById("chevron-ingredient")
+  const containerInputIng = document.querySelector(".container-input-ing")
+
+  ulIngredients.style.display = "none"
+
+  containerInputIng.addEventListener("click", () => {
+    if (ulIngredients.style.display === "flex") {
+      ulIngredients.style.display = "none"
+      inputIngredient.placeholder = "Ingrédients"
+      inputIngredient.style.width = "120px"
+      containerInputIng.style.width = "200px"
+      inputIngredient.style.opacity = "1"
+      chevronIngredient.style.transform = "rotate(360deg)"
+    } else if (ulIngredients.style.display === "none"){
+      ulIngredients.style.display = "flex"
+      inputIngredient.placeholder = "Rechercher un ingrédient"
+      containerInputIng.style.width = "578px"
+      inputIngredient.style.width = "528px"
+      inputIngredient.style.opacity = "0.5"
+      chevronIngredient.style.transform = "rotate(180deg)"
+    }
+  })
+}
+
+/**
+ * Build DOM and display li ustensils. Based on params (all li ustensils if all recipes / li ustensils filtered if recipes filtered)
+ * sort by alphabetical order and remove duplicates li
+ * @param {array} recipes - allRecipes or recipes filtered
  */
 function displaySelectUstensils(recipes) {
   const ustensilArray = [] 
   let arrayUstensilFinish = [] 
 
   for (const recipe of recipes){
-    const ustensilsElement = recipe.ustensils 
+    const ustensilsElement = recipe.ustensils
     for (const ustensils of ustensilsElement) {
-      ustensilArray.push(ustensils.toLowerCase()) 
+      ustensilArray.push(ustensils.toLowerCase())
       const uniqueSet = new Set(ustensilArray) // utilisation de l'objet Set qui ne stocke que des valeurs uniques
       arrayUstensilFinish = Array.from(uniqueSet) // conversion de uniqueSet en tableau
     }
   }
+  const containerInputUstensil= document.querySelector(".container-input-ustensils")
+  containerInputUstensil.appendChild(ulUstensils)
 
+  arrayUstensilFinish.sort()
   for (const ustensil of arrayUstensilFinish) {
-    const tagOptionUstensils = document.createElement("option") 
-    selectUstensils.appendChild(tagOptionUstensils)
+    const tagOptionUstensils = document.createElement("li") 
+    ulUstensils.appendChild(tagOptionUstensils)
     tagOptionUstensils.innerHTML = ustensil
-    tagOptionUstensils.value = ustensil
+    tagOptionUstensils.className = "element-ustensil"
     tagOptionUstensils.ariaLabel = `sélectionner l'ustensil ${ustensil}`
   }
+  searchInUstensils(arrayUstensilFinish)
+}
+
+
+/**
+ * Search function in li, with input search
+ * Call function displayTag() for display tag if user click li
+ * @param {array} arrayUstensils - allUstensils or ustensils filtered
+ */
+function searchInUstensils(arrayUstensils) {
+  const allElementsUstensils = document.querySelectorAll(".element-ustensil")
+  arrayUstensils = []
+  let newLi = []
+  for (const ustensil of allElementsUstensils) {
+    arrayUstensils.push(ustensil.innerHTML)
+  }
+  inputUstensil.addEventListener("input", e => {
+    newLi = arrayUstensils.filter(li => li.includes(e.target.value.trim()))
+    ulUstensils.innerHTML = ""
+    console.log(newLi);
+    for (const li of newLi) {
+      const tagLi = document.createElement("li")
+      ulUstensils.appendChild(tagLi)
+      tagLi.className = "element-ustensil"
+      tagLi.innerHTML = li
+    }
+    displayTag()
+  })
 }
 
 /**
- * Build DOM select device and display select device based on params (all select device if all recipes / select device filtered if recipes filtered)
- * Accessibility
- * @param {array} recipes - allRecipes or recipes filtered 
+ * Function toogle div container-input-ustensils
  */
-function displaySelectDevice(recipes) {
+function toogleUstensils() {
+  const chevronUstensils = document.getElementById("chevron-ustensil")
+  const containerInputUst = document.querySelector(".container-input-ust")
+  ulUstensils.style.display = "none"
+
+  containerInputUst.addEventListener("click", () => {
+    if (ulUstensils.style.display === "flex") {
+      ulUstensils.style.display = "none"
+      inputUstensil.placeholder = "Ustensiles"
+      inputUstensil.style.width = "120px"
+      containerInputUst.style.width = "200px"
+      inputUstensil.style.opacity = "1"
+      chevronUstensils.style.transform = "rotate(360deg)"
+    } else if (ulUstensils.style.display === "none"){
+      ulUstensils.style.display = "flex"
+      inputUstensil.placeholder = "Rechercher un ustensile"
+      inputUstensil.style.width = "528px"
+      containerInputUst.style.width = "578px"
+      inputUstensil.style.opacity = "0.5"
+      chevronUstensils.style.transform = "rotate(180deg)"
+    }
+  })
+}
+
+/**
+ * Build DOM and display li devices. Based on params (all li devices if all recipes / li devices filtered if recipes filtered)
+ * sort by alphabetical order and remove duplicates li
+ * @param {array} recipes - allRecipes or recipes filtered
+ */
+ function displaySelectDevice(recipes) {
   const deviceArray = []
   let arrayDeviceFinish = [];
   
   for (const recipe of recipes) {
-    const deviceElement = recipe.appliance 
+    const deviceElement = recipe.appliance // string
     deviceArray.push(deviceElement.toLowerCase())
     const uniqueSet = new Set(deviceArray)
     arrayDeviceFinish = Array.from(uniqueSet)
   }
 
+  const containerInputDevice= document.querySelector(".container-input-devices")
+  containerInputDevice.appendChild(ulDevices)
+
+  arrayDeviceFinish.sort()
+
   for (const device of arrayDeviceFinish) {
-    const tagOptionDevice = document.createElement("option")
-    selectDevices.appendChild(tagOptionDevice)
+    const tagOptionDevice = document.createElement("li")
+    ulDevices.appendChild(tagOptionDevice)
     tagOptionDevice.innerHTML = device
-    tagOptionDevice.value = device
+    tagOptionDevice.className = "element-device"
     tagOptionDevice.ariaLabel = `sélectionner l'appareil ${device}`
   }
+  searchInDevices(arrayDeviceFinish)
 }
 
+
+/**
+ * Search function in li, with input search
+ * Call function displayTag() for display tag if user click li
+ * @param {array} arrayDevices - allDevices or devices filtered
+ */
+function searchInDevices(arrayDevices) {
+  const allElementsDevices = document.querySelectorAll(".element-device")
+  arrayDevices = []
+  let newLi = []
+  for (const device of allElementsDevices) {
+    arrayDevices.push(device.innerHTML)
+  }
+
+  inputDevice.addEventListener("input", e => {
+    newLi = arrayDevices.filter(li => li.includes(e.target.value.trim()))
+    ulDevices.innerHTML = ""
+  
+    for (const li of newLi) {
+      const tagLi = document.createElement("li")
+      ulDevices.appendChild(tagLi)
+      tagLi.className = "element-device"
+      tagLi.innerHTML = li
+    }
+    displayTag()
+  })
+}
+
+/**
+ * Function toogle div container-input-devices
+ */
+function toogleDevices() {
+  const chevronDevices = document.getElementById("chevron-device")
+  const containerInputDev = document.querySelector(".container-input-dev")
+  ulDevices.style.display = "none"
+  
+  containerInputDev.addEventListener("click", () => {
+    if (ulDevices.style.display === "flex") {
+      ulDevices.style.display = "none"
+      inputDevice.placeholder = "Appareils"
+      inputDevice.style.width = "120px"
+      containerInputDev.style.width = "200px"
+      inputDevice.style.opacity = "1"
+      chevronDevices.style.transform = "rotate(180deg)"
+    } else if (ulDevices.style.display === "none"){
+      ulDevices.style.display = "flex"
+      inputDevice.placeholder = "Rechercher un appareil"
+      inputDevice.style.width = "528px"
+      containerInputDev.style.width = "578px"
+      inputDevice.style.opacity = "0.5"
+    }
+  })
+}
+  
 
 /**
  * Build and display tags - Add in tagSelect (array) all tags selected
- * Accessibility
  * Call functions sortRecipesByTag() and closeTag()
  */
 function displayTag() {
-  const selectAll = [selectIngredients, selectDevices, selectUstensils ]
+  const allElementsIngredients = document.querySelectorAll(".element-ingredient")
+  const allElementsDevices = document.querySelectorAll(".element-device")
+  const allElementsUstensils = document.querySelectorAll(".element-ustensil")
 
-  const divTag = document.createElement("div");
-  filter.prepend(divTag)
-  divTag.className = "tag"
+  const allElements = [allElementsIngredients, allElementsDevices, allElementsUstensils]
+  const divTag = document.querySelector('.tag')
 
-  for (const select of selectAll) {
-    select.addEventListener("change", e => {
-      let divTagSpanImg = document.createElement('div');
-      divTag.appendChild(divTagSpanImg)
-      let spanTag = document.createElement('span')
-      divTagSpanImg.appendChild(spanTag)
-      spanTag.innerHTML = e.target.value
-      let imgTag = document.createElement('img');
-      divTagSpanImg.appendChild(imgTag)
-      imgTag.src = "./assets/close-tag.png"
-      imgTag.id = e.target.value //donne comme id à l'img le nom du tag
-      imgTag.className = "close-tag"
-      imgTag.alt = "croix pour fermer le tag"
-      imgTag.ariaLabel = "icone d'une croix pour fermer le tag sélectionné"
-      imgTag.tabIndex = 1
+  for (const element of allElements) {
+    element.forEach(el => {
+      el.addEventListener("click", (e) => {
+        let divTagSpanImg = document.createElement('div');
+        divTag.appendChild(divTagSpanImg)
+        let spanTag = document.createElement('span')
+        divTagSpanImg.appendChild(spanTag)
+        spanTag.innerHTML = e.target.innerHTML
+        let imgTag = document.createElement('img');
+        divTagSpanImg.appendChild(imgTag)
+        imgTag.src = "./assets/close-tag.png"
+        imgTag.id = e.target.innerHTML //donne comme id à l'img le nom du tag
+        imgTag.className = "close-tag"
+        imgTag.alt = "croix pour fermer le tag"
+        imgTag.ariaLabel = "icone d'une croix pour fermer le tag sélectionné"
+        imgTag.tabIndex = 1
 
-      if (select.id === 'ingredients'){
-        divTagSpanImg.className = 'tag-ingredients'
-        divTagSpanImg.id = e.target.value
-        divTagSpanImg.tabIndex = 1
-        divTagSpanImg.ariaLabel = `filtre les recettes avec ingrédient ${e.target.value}`
-      } else if (select.id === 'devices'){
-        divTagSpanImg.className = 'tag-device'
-        divTagSpanImg.id = e.target.value
-        divTagSpanImg.tabIndex = 1
-        divTagSpanImg.ariaLabel = `filtre les recettes avec appareil ${e.target.value}`
-      } else if (select.id === 'ustensils'){
-        divTagSpanImg.className = 'tag-ustensils'
-        divTagSpanImg.id = e.target.value
-        divTagSpanImg.tabIndex = 1
-        divTagSpanImg.ariaLabel = `filtre les recettes avec ustensil ${e.target.value}`
-      }
-      tagSelect.push(e.target.value) //tableau contient tous les tags selectionnés
-      sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
-      closeTag(recipes)
+        if (el.className === 'element-ingredient'){
+          divTagSpanImg.className = 'tag-ingredients'
+          divTagSpanImg.id = e.target.innerHTML
+          divTagSpanImg.tabIndex = 1
+          divTagSpanImg.ariaLabel = `filtre les recettes avec ingrédient ${el.innerHTML}`
+
+        } else if (el.className === 'element-device' ){
+          divTagSpanImg.className = 'tag-device'
+          divTagSpanImg.id = e.target.innerHTML
+          divTagSpanImg.tabIndex = 1
+          divTagSpanImg.ariaLabel = `filtre les recettes avec appareil ${el.innerHTML}`
+        
+        } else if (el.className === 'element-ustensil'){
+          divTagSpanImg.className = 'tag-ustensils'
+          divTagSpanImg.id = e.target.innerHTML
+          divTagSpanImg.tabIndex = 1
+          divTagSpanImg.ariaLabel = `filtre les recettes avec ustensil ${el.innerHTML}`
+        }
+        
+        
+        const containerInputIng = document.querySelector(".container-input-ing")
+        ulIngredients.style.display = "none"
+        inputIngredient.placeholder = "Ingrédients"
+        inputIngredient.style.width = "120px"
+        containerInputIng.style.width = "200px"
+        inputIngredient.style.opacity = "1"
+
+        const containerInputDev = document.querySelector(".container-input-dev")
+        ulDevices.style.display = "none"
+        inputDevice.placeholder = "Appareils"
+        inputDevice.style.width = "120px"
+        containerInputDev.style.width = "200px"
+        inputDevice.style.opacity = "1"
+ 
+        const containerInputUst = document.querySelector(".container-input-ust")
+        ulUstensils.style.display = "none"
+        inputUstensil.placeholder = "Ustensiles"
+        inputUstensil.style.width = "120px"
+        containerInputUst.style.width = "200px"
+        inputUstensil.style.opacity = "1"
+
+        tagSelect.push(e.target.innerHTML)
+
+        for (el of allElementsUstensils) {
+          if (el.innerHTML === e.target.innerHTML){
+            console.log(el);
+            el.remove()
+          }
+        }
+        sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
+        closeTag(recipes)
+       
+      })
     })
   }
 }
-
+ 
 /**
  * sort recipes by tag based on tag selected by user and return allRecipes (new array with recipes filtered)
- * Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params allRecipes
+ * Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params allRecipes / displayTag()
  * @param {array} recipes - allRecipes or recipes filtered 
  */
 function sortRecipesByTag(recipes) {
@@ -262,7 +486,7 @@ function sortRecipesByTag(recipes) {
   Boucle sur toutes les balises tagustensils
   Défini par défaut fitlerustensil sur false
   Boucle sur tous les ustensils des recettes
-  Si l'un des ustensils des recettes incluent le tag ET que l'id de la balise tagustensil (id = intitulé du tag) est égal à l'un des ustensils qu'on trouve dans les recettes -> on passe filterUstensil à true
+  Si l'un des ustensils des recettes incluent le tag ET que l'id de la balise tagustensil (id = intitulé du tag) est égale à l'un des ustensils qu'on trouve dans les recettes -> on passe filterUstensil à true
   Idem pour chacun des 3 selects, on retourne les résultats (true / false) = les recettes filtrées --> allRecipes
   */
   allRecipes = recipes.filter(recipe => 
@@ -299,31 +523,27 @@ function sortRecipesByTag(recipes) {
    
   containerArticleRecipes.innerHTML = ""
   displayAllRecipes(allRecipes)
+  
+  const ulDevices = document.querySelector(".list-devices")
+  const ulUstensils = document.querySelector(".list-ustensils")
+  const ulIngredients = document.querySelector(".list-ingredients")
 
-  selectDevices.innerHTML = ""
-  const optionDevice = document.createElement("option")
-  optionDevice.innerHTML = "Appareils"
-  selectDevices.prepend(optionDevice)
+  ulDevices.innerHTML = '';
   displaySelectDevice(allRecipes)
 
-  selectIngredients.innerHTML = ""
-  const optionIngredient = document.createElement("option")
-  selectIngredients.prepend(optionIngredient)
-  optionIngredient.innerHTML = "Ingredients"
+  ulIngredients.innerHTML='';
   displaySelectIngredients(allRecipes)
 
-  selectUstensils.innerHTML = ""
-  const optionUstensil = document.createElement("option")
-  selectUstensils.prepend(optionUstensil)
-  optionUstensil.innerHTML = "Ustensiles"
+  ulUstensils.innerHTML = '';
   displaySelectUstensils(allRecipes)
+  
+  displayTag()
 }
 
-
 /**
- * Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
+ * Allows to close the tag on click and sort again recipes 
  * Update tagSelect array 
- * @param {array} recipes - allRecipes or recipes filtered
+ * @param {recipes} recipes - allRecipes or recipes filtered 
  */
 function closeTag(recipes) {
   const close = document.getElementsByClassName("close-tag")
@@ -341,6 +561,7 @@ function closeTag(recipes) {
           tagSelect.splice(index, 1) //suppression de cet élément par son index
         }
       }
+
       for (const tagDevice of tagsDevices) {
         if (item.id === tagDevice.id) {
           tagDevice.remove()
@@ -356,53 +577,7 @@ function closeTag(recipes) {
         }
       }
       
-      if (tagSelect.length === 0) {
-        displaySelectDevice(recipes)
-        displaySelectIngredients(recipes)
-        displaySelectUstensils(recipes)
-        displayAllRecipes(recipes)
-      } else { 
-        sortRecipesByTag(recipes)
-      }
-    })
-  
-    item.addEventListener("keydown", e => {
-      item.focus()
-      const tagsIngredients = document.querySelectorAll(".tag-ingredients")
-      const tagsUstensils = document.querySelectorAll(".tag-ustensils")
-      const tagsDevices = document.querySelectorAll(".tag-device")
-      if (e.key === "Enter") {
-        for (const tagIngredient of tagsIngredients) {
-          if (item.id === tagIngredient.id) { 
-            tagIngredient.remove()
-            let index = tagSelect.indexOf(tagIngredient.id) 
-            tagSelect.splice(index, 1) 
-          }
-        }
-        for (const tagDevice of tagsDevices) {
-          if (item.id === tagDevice.id) {
-            tagDevice.remove()
-            let index = tagSelect.indexOf(tagDevice.id) 
-            tagSelect.splice(index, 1) 
-          }
-        }
-        for (const tagUstensil of tagsUstensils) {
-          if (item.id === tagUstensil.id) {
-            tagUstensil.remove()
-            let index = tagSelect.indexOf(tagUstensil.id) 
-            tagSelect.splice(index, 1) 
-          }
-        }
-        
-        if (tagSelect.length === 0) {
-          displaySelectDevice(recipes)
-          displaySelectIngredients(recipes)
-          displaySelectUstensils(recipes)
-          displayAllRecipes(recipes)
-        } else { 
-          sortRecipesByTag(recipes)
-        }
-      }
+      sortRecipesByTag(recipes)
     })
   }
 }
