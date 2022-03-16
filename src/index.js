@@ -160,6 +160,7 @@ function displayAllRecipes(recipes) {
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
+ * @param {array} arrayIngredients - allIngredients or ingredients filtered
  */
 function searchInIngredients(arrayIngredients) {
   const allElementsIngredients = document.querySelectorAll(".element-ingredient")
@@ -241,9 +242,11 @@ function displaySelectUstensils(recipes) {
   searchInUstensils(arrayUstensilFinish)
 }
 
+
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
+ * @param {array} arrayUstensils - allUstensils or ustensils filtered
  */
 function searchInUstensils(arrayUstensils) {
   const allElementsUstensils = document.querySelectorAll(".element-ustensil")
@@ -324,9 +327,11 @@ function toogleUstensils() {
   searchInDevices(arrayDeviceFinish)
 }
 
+
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
+ * @param {array} arrayDevices - allDevices or devices filtered
  */
 function searchInDevices(arrayDevices) {
   const allElementsDevices = document.querySelectorAll(".element-device")
@@ -335,7 +340,7 @@ function searchInDevices(arrayDevices) {
   for (const device of allElementsDevices) {
     arrayDevices.push(device.innerHTML)
   }
-  console.log(arrayDevices);
+
   inputDevice.addEventListener("input", e => {
     newLi = arrayDevices.filter(li => li.includes(e.target.value.trim()))
     ulDevices.innerHTML = ""
@@ -573,16 +578,6 @@ function closeTag(recipes) {
         }
       }
       
-      // if (tagSelect.length === 0) {
-      //   console.log("vide");
-      //   displaySelectDevice(recipes)
-      //   displaySelectIngredients(recipes)
-      //   displaySelectUstensils(recipes)
-      //   displayAllRecipes(recipes)
-        
-      // } else { 
-      //   sortRecipesByTag(recipes)
-      // }
       sortRecipesByTag(recipes)
     })
   }
