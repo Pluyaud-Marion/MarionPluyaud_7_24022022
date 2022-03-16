@@ -258,7 +258,6 @@ function searchInUstensils(arrayUstensils) {
   inputUstensil.addEventListener("input", e => {
     newLi = arrayUstensils.filter(li => li.includes(e.target.value.trim()))
     ulUstensils.innerHTML = ""
-    console.log(newLi);
     for (const li of newLi) {
       const tagLi = document.createElement("li")
       ulUstensils.appendChild(tagLi)
@@ -456,7 +455,6 @@ function displayTag() {
 
         for (el of allElementsUstensils) {
           if (el.innerHTML === e.target.innerHTML){
-            console.log(el);
             el.remove()
           }
         }
@@ -598,7 +596,7 @@ function displayRecipesBySearchInput() {
 
   searchBar.addEventListener("input", e => {
     const valueInput = e.target.value.toLowerCase().trim() //récupération de la valeur de l'input
-    console.log(valueInput);
+    
     if (valueInput.length > 2) {
       containerArticleRecipes.innerHTML = "" 
           filterRecipes = recipes.filter(recipe => {
