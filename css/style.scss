@@ -55,6 +55,7 @@ label{
         font-size: 16px;
         .close-tag{
             width: 17%;
+            cursor: pointer;
         }
     }
     .tag-ustensils {
@@ -74,6 +75,7 @@ label{
         font-size: 16px;
         .close-tag{
             width: 17%;
+            cursor: pointer;
         }
     }
     .tag-device {
@@ -93,6 +95,7 @@ label{
         font-size: 16px;
         .close-tag{
             width: 17%;
+            cursor: pointer;
         }
     }
 }
@@ -103,6 +106,7 @@ label{
     width: 45%;
     justify-content: space-between;
     .container-input-ingredients{
+        cursor: pointer;
         border: none;
         display: block;
         background-color: #3282F7;
@@ -146,6 +150,7 @@ label{
         }
     }
     .container-input-ustensils {
+        cursor: pointer;
         display: block;
         background-color: #ED6454;
         font-family: 'Lato', sans-serif;
@@ -189,6 +194,7 @@ label{
         }
     }
     .container-input-devices {
+        cursor: pointer;
         display: block;
         background-color: #68D9A4;
         font-family: 'Lato', sans-serif;
