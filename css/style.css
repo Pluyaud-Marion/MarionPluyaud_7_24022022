@@ -71,7 +71,7 @@ label {
   color: white;
   width: 12%;
   height: 40px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .tag .tag-ingredients .close-tag {
@@ -98,7 +98,7 @@ label {
   width: 12%;
   height: 40px;
   background-color: #ED6454;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .tag .tag-ustensils .close-tag {
@@ -125,7 +125,7 @@ label {
   color: white;
   width: 12%;
   height: 40px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .tag .tag-device .close-tag {
@@ -243,6 +243,7 @@ label {
       flex-wrap: wrap;
   padding-left: 5px;
   margin-top: 0;
+  border-radius: 5px;
 }
 
 .filter .container-input-ustensils .list-ustensils .element-ustensil {
@@ -297,6 +298,7 @@ label {
       flex-wrap: wrap;
   padding-left: 5px;
   margin-top: 0;
+  border-radius: 5px;
 }
 
 .filter .container-input-devices .list-devices .element-device {
@@ -431,5 +433,8 @@ label {
   text-align: start;
   line-height: 14px;
   margin-right: 2%;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 /*# sourceMappingURL=style.css.map */

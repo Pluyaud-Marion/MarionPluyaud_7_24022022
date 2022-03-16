@@ -439,8 +439,7 @@ function displayTag() {
         inputDevice.style.width = "120px"
         containerInputDev.style.width = "200px"
         inputDevice.style.opacity = "1"
-
-      
+ 
         const containerInputUst = document.querySelector(".container-input-ust")
         ulUstensils.style.display = "none"
         inputUstensil.placeholder = "Ustensiles"
