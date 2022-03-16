@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    <p>Allows to close the tag on click (or keydown Enter) and sort again recipes (display recipes and display selects)
+    <p>Allows to close the tag on click and sort again recipes
 Update tagSelect array</p>
 </div>
 
@@ -206,7 +206,7 @@ Update tagSelect array</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line342">line 342</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line549">line 549</a>
     </li></ul></dd>
     
 
@@ -250,8 +250,7 @@ Update tagSelect array</p>
 
 
 <div class="description">
-    <p>Build DOM recipes cards and display recipes (all or filtered) based on params
-Accessibility</p>
+    <p>Build DOM recipes cards and display recipes (all or filtered) based on params</p>
 </div>
 
 
@@ -344,7 +343,7 @@ Accessibility</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line31">line 31</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -434,7 +433,7 @@ Add sortByTag</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line431">line 431</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line591">line 591</a>
     </li></ul></dd>
     
 
@@ -478,8 +477,8 @@ Add sortByTag</p>
 
 
 <div class="description">
-    <p>Build DOM select device and display select device based on params (all select device if all recipes / select device filtered if recipes filtered)
-Accessibility</p>
+    <p>Build DOM and display li devices. Based on params (all li devices if all recipes / li devices filtered if recipes filtered)
+sort by alphabetical order and remove duplicates li</p>
 </div>
 
 
@@ -572,7 +571,7 @@ Accessibility</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line187">line 187</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line304">line 304</a>
     </li></ul></dd>
     
 
@@ -616,8 +615,8 @@ Accessibility</p>
 
 
 <div class="description">
-    <p>Build DOM select ingredient and display select ingredient based on params (all select ingredient if all recipes / select ingredient filtered if recipes filtered)
-Accessibility</p>
+    <p>Build DOM and display li ingredients. Based on params (all li ingredients if all recipes / li ingredients filtered if recipes filtered)
+sort by alphabetical order and remove duplicates li</p>
 </div>
 
 
@@ -710,7 +709,7 @@ Accessibility</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line132">line 132</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line133">line 133</a>
     </li></ul></dd>
     
 
@@ -754,8 +753,8 @@ Accessibility</p>
 
 
 <div class="description">
-    <p>Build DOM select ustensils and display select ustensils based on params (all select ustensils if all recipes / select ustensils filtered if recipes filtered)
-Accessibility</p>
+    <p>Build DOM and display li ustensils. Based on params (all li ustensils if all recipes / li ustensils filtered if recipes filtered)
+sort by alphabetical order and remove duplicates li</p>
 </div>
 
 
@@ -848,7 +847,7 @@ Accessibility</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line160">line 160</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -893,7 +892,6 @@ Accessibility</p>
 
 <div class="description">
     <p>Build and display tags - Add in tagSelect (array) all tags selected
-Accessibility
 Call functions sortRecipesByTag() and closeTag()</p>
 </div>
 
@@ -938,7 +936,7 @@ Call functions sortRecipesByTag() and closeTag()</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line214">line 214</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line389">line 389</a>
     </li></ul></dd>
     
 
@@ -1026,7 +1024,421 @@ Call functions sortRecipesByTag() and closeTag()</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line17">line 17</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="searchInDevices"><span class="type-signature"></span>searchInDevices<span class="signature">(arrayDevices)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Search function in li, with input search
+Call function displayTag() for display tag if user click li</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrayDevices</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>allDevices or devices filtered</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="searchInIngredients"><span class="type-signature"></span>searchInIngredients<span class="signature">(arrayIngredients)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Search function in li, with input search
+Call function displayTag() for display tag if user click li</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrayIngredients</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>allIngredients or ingredients filtered</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line165">line 165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="searchInUstensils"><span class="type-signature"></span>searchInUstensils<span class="signature">(arrayUstensils)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Search function in li, with input search
+Call function displayTag() for display tag if user click li</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arrayUstensils</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>allUstensils or ustensils filtered</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line251">line 251</a>
     </li></ul></dd>
     
 
@@ -1071,7 +1483,7 @@ Call functions sortRecipesByTag() and closeTag()</p>
 
 <div class="description">
     <p>sort recipes by tag based on tag selected by user and return allRecipes (new array with recipes filtered)
-Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params allRecipes</p>
+Call again functions displayAllRecipes() / displaySelectDevice() / displaySelectIngredients() / displaySelectUstensils() with params allRecipes / displayTag()</p>
 </div>
 
 
@@ -1164,7 +1576,271 @@ Call again functions displayAllRecipes() / displaySelectDevice() / displaySelect
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line265">line 265</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line476">line 476</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toogleDevices"><span class="type-signature"></span>toogleDevices<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Function toogle div container-input-devices</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line361">line 361</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toogleIngredients"><span class="type-signature"></span>toogleIngredients<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Function toogle div container-input-ingredients</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toogleUstensils"><span class="type-signature"></span>toogleUstensils<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Function toogle div container-input-ustensils</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line275">line 275</a>
     </li></ul></dd>
     
 
@@ -1210,13 +1886,13 @@ Call again functions displayAllRecipes() / displaySelectDevice() / displaySelect
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeTag">closeTag</a></li><li><a href="global.html#displayAllRecipes">displayAllRecipes</a></li><li><a href="global.html#displayRecipesBySearchInput">displayRecipesBySearchInput</a></li><li><a href="global.html#displaySelectDevice">displaySelectDevice</a></li><li><a href="global.html#displaySelectIngredients">displaySelectIngredients</a></li><li><a href="global.html#displaySelectUstensils">displaySelectUstensils</a></li><li><a href="global.html#displayTag">displayTag</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#sortRecipesByTag">sortRecipesByTag</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeTag">closeTag</a></li><li><a href="global.html#displayAllRecipes">displayAllRecipes</a></li><li><a href="global.html#displayRecipesBySearchInput">displayRecipesBySearchInput</a></li><li><a href="global.html#displaySelectDevice">displaySelectDevice</a></li><li><a href="global.html#displaySelectIngredients">displaySelectIngredients</a></li><li><a href="global.html#displaySelectUstensils">displaySelectUstensils</a></li><li><a href="global.html#displayTag">displayTag</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#searchInDevices">searchInDevices</a></li><li><a href="global.html#searchInIngredients">searchInIngredients</a></li><li><a href="global.html#searchInUstensils">searchInUstensils</a></li><li><a href="global.html#sortRecipesByTag">sortRecipesByTag</a></li><li><a href="global.html#toogleDevices">toogleDevices</a></li><li><a href="global.html#toogleIngredients">toogleIngredients</a></li><li><a href="global.html#toogleUstensils">toogleUstensils</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri Mar 11 2022 15:39:56 GMT+0100 (heure normale d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 16 2022 11:25:47 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>
