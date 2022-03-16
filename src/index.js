@@ -12,6 +12,9 @@ const ulDevices = document.querySelector('.list-devices')
 const ulUstensils = document.querySelector('.list-ustensils')
 const ulIngredients = document.querySelector('.list-ingredients')
 let tagSelect = []
+let arrayDevices = []
+let arrayIngredients = []
+let arrayUstensils = []
 
 /**
  *  Main function calling all functions at loading page
@@ -26,9 +29,9 @@ toogleUstensils()
 toogleIngredients()
 displayTag()
 displayRecipesBySearchInput()
-searchInIngredients()
-searchInUstensils()
-searchInDevices()
+searchInIngredients(arrayIngredients)
+searchInUstensils(arrayUstensils)
+searchInDevices(arrayDevices)
 }
 
 /**
@@ -144,7 +147,6 @@ function displayAllRecipes(recipes) {
   containerInputIngredient.appendChild(ulIngredients)
   
   arrayIngredientFinish.sort()
-  console.log(arrayIngredientFinish);
   for (const element of arrayIngredientFinish) {
     const tagOptionIngredient = document.createElement("li") 
     ulIngredients.appendChild(tagOptionIngredient)
@@ -152,15 +154,16 @@ function displayAllRecipes(recipes) {
     tagOptionIngredient.className = "element-ingredient"
     tagOptionIngredient.ariaLabel = `sélectionner l'ingrédient ${element}`
   }
+  searchInIngredients(arrayIngredientFinish)
 }
 
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
  */
-function searchInIngredients() {
+function searchInIngredients(arrayIngredients) {
   const allElementsIngredients = document.querySelectorAll(".element-ingredient")
-  let arrayIngredients = []
+  arrayIngredients = []
   let newLi = []
   for (const ingredient of allElementsIngredients) {
     arrayIngredients.push(ingredient.innerHTML)
@@ -192,14 +195,17 @@ function toogleIngredients() {
     if (ulIngredients.style.display === "flex") {
       ulIngredients.style.display = "none"
       inputIngredient.placeholder = "Ingrédients"
-      inputIngredient.style.width = "auto"
+      inputIngredient.style.width = "120px"
+      containerInputIng.style.width = "200px"
       inputIngredient.style.opacity = "1"
-      chevronIngredient.style.transform = "rotate(180deg)"
+      chevronIngredient.style.transform = "rotate(360deg)"
     } else if (ulIngredients.style.display === "none"){
       ulIngredients.style.display = "flex"
       inputIngredient.placeholder = "Rechercher un ingrédient"
-      inputIngredient.style.width = "100%"
+      containerInputIng.style.width = "578px"
+      inputIngredient.style.width = "528px"
       inputIngredient.style.opacity = "0.5"
+      chevronIngredient.style.transform = "rotate(180deg)"
     }
   })
 }
@@ -232,15 +238,16 @@ function displaySelectUstensils(recipes) {
     tagOptionUstensils.className = "element-ustensil"
     tagOptionUstensils.ariaLabel = `sélectionner l'ustensil ${ustensil}`
   }
+  searchInUstensils(arrayUstensilFinish)
 }
 
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
  */
-function searchInUstensils() {
+function searchInUstensils(arrayUstensils) {
   const allElementsUstensils = document.querySelectorAll(".element-ustensil")
-  let arrayUstensils = []
+  arrayUstensils = []
   let newLi = []
   for (const ustensil of allElementsUstensils) {
     arrayUstensils.push(ustensil.innerHTML)
@@ -271,14 +278,17 @@ function toogleUstensils() {
     if (ulUstensils.style.display === "flex") {
       ulUstensils.style.display = "none"
       inputUstensil.placeholder = "Ustensiles"
-      inputUstensil.style.width = "auto"
+      inputUstensil.style.width = "120px"
+      containerInputUst.style.width = "200px"
       inputUstensil.style.opacity = "1"
-      chevronUstensils.style.transform = "rotate(180deg)"
+      chevronUstensils.style.transform = "rotate(360deg)"
     } else if (ulUstensils.style.display === "none"){
       ulUstensils.style.display = "flex"
       inputUstensil.placeholder = "Rechercher un ustensile"
-      inputUstensil.style.width = "100%"
+      inputUstensil.style.width = "528px"
+      containerInputUst.style.width = "578px"
       inputUstensil.style.opacity = "0.5"
+      chevronUstensils.style.transform = "rotate(180deg)"
     }
   })
 }
@@ -311,19 +321,21 @@ function toogleUstensils() {
     tagOptionDevice.className = "element-device"
     tagOptionDevice.ariaLabel = `sélectionner l'appareil ${device}`
   }
+  searchInDevices(arrayDeviceFinish)
 }
 
 /**
  * Search function in li, with input search
  * Call function displayTag() for display tag if user click li
  */
-function searchInDevices() {
+function searchInDevices(arrayDevices) {
   const allElementsDevices = document.querySelectorAll(".element-device")
-  let arrayDevices = []
+  arrayDevices = []
   let newLi = []
   for (const device of allElementsDevices) {
     arrayDevices.push(device.innerHTML)
   }
+  console.log(arrayDevices);
   inputDevice.addEventListener("input", e => {
     newLi = arrayDevices.filter(li => li.includes(e.target.value.trim()))
     ulDevices.innerHTML = ""
@@ -350,13 +362,15 @@ function toogleDevices() {
     if (ulDevices.style.display === "flex") {
       ulDevices.style.display = "none"
       inputDevice.placeholder = "Appareils"
-      inputDevice.style.width = "auto"
+      inputDevice.style.width = "120px"
+      containerInputDev.style.width = "200px"
       inputDevice.style.opacity = "1"
       chevronDevices.style.transform = "rotate(180deg)"
     } else if (ulDevices.style.display === "none"){
       ulDevices.style.display = "flex"
       inputDevice.placeholder = "Rechercher un appareil"
-      inputDevice.style.width = "100%"
+      inputDevice.style.width = "528px"
+      containerInputDev.style.width = "578px"
       inputDevice.style.opacity = "0.5"
     }
   })
@@ -436,6 +450,7 @@ function displayTag() {
         }
         sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
         closeTag(recipes)
+       
       })
     })
   }
@@ -510,7 +525,7 @@ function sortRecipesByTag(recipes) {
 
   ulUstensils.innerHTML = '';
   displaySelectUstensils(allRecipes)
-
+  
   displayTag()
 }
 
@@ -618,11 +633,13 @@ function displayRecipesBySearchInput() {
         })
       }
       displayTag()
+
       if (filterRecipes.length === 0) {
         containerArticleRecipes.innerHTML = 'Aucune recette ne correspond à votre critère... vous pouvez chercher "tarte aux pommes", "poisson", etc.'
       }
      
     } else {
+      containerArticleRecipes.innerHTML = ""
       displayAllRecipes(recipes)
       console.log("il n'y a pas 3 lettres")
     }

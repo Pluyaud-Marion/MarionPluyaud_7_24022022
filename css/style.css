@@ -145,25 +145,15 @@ label {
 }
 
 .filter .container-input-ingredients {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #3282F7;
-  padding-left: 1%;
-  padding-right: 1%;
-  font-family: 'Lato', sans-serif;
   border: none;
+  display: block;
+  background-color: #3282F7;
+  font-family: 'Lato', sans-serif;
   border-radius: 5px;
   color: white;
   height: 50px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-right: 5%;
+  z-index: 2;
 }
 
 .filter .container-input-ingredients .container-input-ing {
@@ -173,12 +163,17 @@ label {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: auto;
-  width: 100%;
+  width: 200px;
+  height: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .filter .container-input-ingredients .container-input-ing input {
-  background-color: #3282F7;
   border: none;
+  width: 120px;
+  background-color: #3282F7;
   font-size: 18px;
 }
 
@@ -192,7 +187,8 @@ label {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   border-radius: 5px;
-  padding-left: 2%;
+  padding-left: 5px;
+  margin-top: 0;
 }
 
 .filter .container-input-ingredients .list-ingredients .element-ingredient {
@@ -204,25 +200,15 @@ label {
 }
 
 .filter .container-input-ustensils {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: block;
   background-color: #ED6454;
-  padding-left: 1%;
-  padding-right: 1%;
   font-family: 'Lato', sans-serif;
   border: none;
   border-radius: 5px;
   color: white;
   height: 50px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-right: 5%;
+  z-index: 2;
 }
 
 .filter .container-input-ustensils .container-input-ust {
@@ -232,12 +218,17 @@ label {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: auto;
-  width: 100%;
+  width: 200px;
+  height: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .filter .container-input-ustensils .container-input-ust input {
   background-color: #ED6454;
   border: none;
+  width: 120px;
   font-size: 18px;
 }
 
@@ -250,7 +241,8 @@ label {
       justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  padding-left: 2%;
+  padding-left: 5px;
+  margin-top: 0;
 }
 
 .filter .container-input-ustensils .list-ustensils .element-ustensil {
@@ -262,25 +254,15 @@ label {
 }
 
 .filter .container-input-devices {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: block;
   background-color: #68D9A4;
-  padding-left: 1%;
-  padding-right: 1%;
   font-family: 'Lato', sans-serif;
   border: none;
   border-radius: 5px;
   color: white;
   height: 50px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-right: 5%;
+  z-index: 2;
 }
 
 .filter .container-input-devices .container-input-dev {
@@ -290,12 +272,17 @@ label {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: auto;
-  width: 100%;
+  height: 50px;
+  width: 200px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .filter .container-input-devices .container-input-dev input {
   background-color: #68D9A4;
   border: none;
+  width: 120px;
   font-size: 18px;
 }
 
@@ -308,7 +295,8 @@ label {
       justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  padding-left: 2%;
+  padding-left: 5px;
+  margin-top: 0;
 }
 
 .filter .container-input-devices .list-devices .element-device {
@@ -321,18 +309,22 @@ label {
 
 .filter input::-webkit-input-placeholder {
   color: white;
+  padding-left: 4%;
 }
 
 .filter input:-ms-input-placeholder {
   color: white;
+  padding-left: 4%;
 }
 
 .filter input::-ms-input-placeholder {
   color: white;
+  padding-left: 4%;
 }
 
 .filter input::placeholder {
   color: white;
+  padding-left: 4%;
 }
 
 .container-article {
