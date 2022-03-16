@@ -641,7 +641,6 @@ function displayRecipesBySearchInput() {
     } else {
       containerArticleRecipes.innerHTML = ""
       displayAllRecipes(recipes)
-      sortRecipesByTag(recipes)
       console.log("il n'y a pas 3 lettres")
     }
   })
