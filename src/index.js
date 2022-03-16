@@ -425,19 +425,27 @@ function displayTag() {
           divTagSpanImg.ariaLabel = `filtre les recettes avec ustensil ${el.innerHTML}`
         }
         
-        ulDevices.style.display = "none"
-        inputDevice.placeholder = "Appareils"
-        inputDevice.style.width = "auto"
-        inputDevice.style.opacity = "1"
-
+        
+        const containerInputIng = document.querySelector(".container-input-ing")
         ulIngredients.style.display = "none"
         inputIngredient.placeholder = "Ingrédients"
-        inputIngredient.style.width = "auto"
+        inputIngredient.style.width = "120px"
+        containerInputIng.style.width = "200px"
         inputIngredient.style.opacity = "1"
 
+        const containerInputDev = document.querySelector(".container-input-dev")
+        ulDevices.style.display = "none"
+        inputDevice.placeholder = "Appareils"
+        inputDevice.style.width = "120px"
+        containerInputDev.style.width = "200px"
+        inputDevice.style.opacity = "1"
+
+      
+        const containerInputUst = document.querySelector(".container-input-ust")
         ulUstensils.style.display = "none"
         inputUstensil.placeholder = "Ustensiles"
-        inputUstensil.style.width = "auto"
+        inputUstensil.style.width = "120px"
+        containerInputUst.style.width = "200px"
         inputUstensil.style.opacity = "1"
 
         tagSelect.push(e.target.innerHTML)
