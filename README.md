@@ -22,8 +22,7 @@ Travail réalisé :
 - Branche Master : contient la recherche par tag
 - Branche algorithme1 : contient la recherche principale implémentée avec les méthodes de l'objet Array (Filter)
 - Branche algorithme2 : contient la recherche principale implémentée avec les boucles natives
-- Site accessible (navigation au clavier possible)
-- Site passé avec succès aux validateurs W3C et Achecker
+- Site passé avec succès aux validateurs W3C HTML et CSS
 - Réalisation d'une documentation JSDoc : https://pluyaud-marion.github.io/MarionPluyaud_7_24022022/docs/
 - Réalisation d'un algorigramme : [algorigramme.pdf](https://github.com/Pluyaud-Marion/MarionPluyaud_7_24022022/files/8231171/algorigramme.pdf)
 - Réalisation d'un comparatif de performance entre les 2 algorithmes (outil Jsben.ch)
@@ -39,4 +38,5 @@ Technologies utilisées :
 Pour lancer le projet : 
 `npm install`
 
+Pour générer la documentation JSDoc : `npm run doc`
 
