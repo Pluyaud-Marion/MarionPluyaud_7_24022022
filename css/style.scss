@@ -3,12 +3,11 @@
 body{
     margin: 0% 5%;
 }
-.hidden {
+label{
     display: none;
 }
-
 .logo-title {
-    margin: 5% auto;
+    margin: 3% auto;
     h1 {
         font-family: 'DM Sans', sans-serif;
         color: $title-color;
@@ -37,13 +36,12 @@ body{
 }
 .tag {
     display: flex;
-    margin: 3% 0%;
+    margin: 2% 0%;
     width: 100%;
     .tag-ingredients {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #3282F7;
         padding-left: 1%;
         padding-right: 1%;
@@ -54,12 +52,15 @@ body{
         color: white;
         width: 12%;
         height: 40px;
+        font-size: 16px;
+        .close-tag{
+            width: 17%;
+        }
     }
     .tag-ustensils {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         padding-left: 1%;
         padding-right: 1%;
         margin-right: 2%;
@@ -70,12 +71,15 @@ body{
         width: 12%;
         height: 40px;
         background-color: #ED6454;
+        font-size: 16px;
+        .close-tag{
+            width: 17%;
+        }
     }
     .tag-device {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        //background: url("../assets/close.svg") 92% 50% / 15px 20px no-repeat;
         background-color: #68D9A4;
         padding-left: 1%;
         padding-right: 1%;
@@ -86,37 +90,157 @@ body{
         color: white;
         width: 12%;
         height: 40px;
+        font-size: 16px;
+        .close-tag{
+            width: 17%;
+        }
     }
 }
 .filter {
-    margin-top: 3%;
+    margin-top: 1%;
     margin-bottom: 3%;
     display: flex;
     width: 45%;
     justify-content: space-between;
-    #ingredients, #ustensils, #devices {
-        padding-left: 3%;
+    .container-input-ingredients{
+        border: none;
+        display: block;
+        background-color: #3282F7;
+        font-family: 'Lato', sans-serif;
+        border-radius: 5px;
+        color: white;
+        height: 50px;
+        margin-right: 5%;
+        z-index: 2;
+        .container-input-ing{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            width: 200px;
+            height: 50px;
+            align-items: center;
+            input{
+                border: none;
+                width: 120px;
+                background-color: #3282F7;
+                font-size: 18px;
+            }
+        }
+        .list-ingredients {
+            background-color: #3282F7;
+            color: white;
+            z-index: 2;
+            width: 580px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            border-radius: 5px;
+            padding-left: 5px;
+            margin-top: 0;
+            .element-ingredient {
+                font-family: 'Lato', sans-serif;
+                width: 30%;
+                list-style: none;
+                line-height: 28px;
+                font-size: 16px;
+            }
+        }
+    }
+    .container-input-ustensils {
+        display: block;
+        background-color: #ED6454;
         font-family: 'Lato', sans-serif;
         border: none;
         border-radius: 5px;
         color: white;
-        width: 30%;
         height: 50px;
+        margin-right: 5%;
+        z-index: 2;
+        .container-input-ust{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            width: 200px;
+            height: 50px;
+            align-items: center;
+            input{
+                background-color: #ED6454;
+                border: none;
+                width: 120px;
+                font-size: 18px;
+            }
+        }
+        .list-ustensils {
+            background-color: #ED6454;
+            color: white;
+            z-index: 2;
+            width: 580px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding-left: 5px;
+            margin-top: 0;
+            border-radius: 5px;
+            .element-ustensil {
+                font-family: 'Lato', sans-serif;
+                width: 30%;
+                list-style: none;
+                line-height: 28px;
+                font-size: 16px;
+            }
+        }
     }
-    #ingredients {
-        background-color: #3282F7;
-    }
-    #devices {
+    .container-input-devices {
+        display: block;
         background-color: #68D9A4;
+        font-family: 'Lato', sans-serif;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        height: 50px;
+        margin-right: 5%;
+        z-index: 2;
+        .container-input-dev{
+            display: flex;
+            justify-content: space-around;
+            margin: auto;
+            height: 50px;
+            width: 200px;
+            align-items: center;
+            input {
+                background-color: #68D9A4;
+                border: none;
+                width: 120px;
+                font-size: 18px;
+            }
+        }
+        .list-devices {
+            background-color: #68D9A4;
+            color: white;
+            z-index: 2;
+            width: 580px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding-left: 5px;
+            margin-top: 0;
+            border-radius: 5px;
+            .element-device {
+                font-family: 'Lato', sans-serif;
+                width: 30%;
+                list-style: none;
+                line-height: 28px;
+                font-size: 16px;
+            }
+        }
     }
-    #ustensils {
-        background-color: #ED6454;
+    input::placeholder{
+        color: white;
+        padding-left: 4%; 
     }
 }
 .container-article{
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
+    font-family: 'Lato', sans-serif;
 
     .article-recipe{
         width: 31%;
@@ -183,6 +307,9 @@ body{
                     text-align: start;
                     line-height: 14px;
                     margin-right: 2%;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 6;
+                    -webkit-box-orient: vertical;
                 }
             }
     }

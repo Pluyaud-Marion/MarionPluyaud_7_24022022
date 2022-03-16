@@ -2,12 +2,12 @@ body {
   margin: 0% 5%;
 }
 
-.hidden {
+label {
   display: none;
 }
 
 .logo-title {
-  margin: 5% auto;
+  margin: 3% auto;
 }
 
 .logo-title h1 {
@@ -47,7 +47,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 3% 0%;
+  margin: 2% 0%;
   width: 100%;
 }
 
@@ -71,6 +71,11 @@ body {
   color: white;
   width: 12%;
   height: 40px;
+  font-size: 16px;
+}
+
+.tag .tag-ingredients .close-tag {
+  width: 17%;
 }
 
 .tag .tag-ustensils {
@@ -93,6 +98,11 @@ body {
   width: 12%;
   height: 40px;
   background-color: #ED6454;
+  font-size: 16px;
+}
+
+.tag .tag-ustensils .close-tag {
+  width: 17%;
 }
 
 .tag .tag-device {
@@ -115,10 +125,15 @@ body {
   color: white;
   width: 12%;
   height: 40px;
+  font-size: 16px;
+}
+
+.tag .tag-device .close-tag {
+  width: 17%;
 }
 
 .filter {
-  margin-top: 3%;
+  margin-top: 1%;
   margin-bottom: 3%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -129,26 +144,189 @@ body {
           justify-content: space-between;
 }
 
-.filter #ingredients, .filter #ustensils, .filter #devices {
-  padding-left: 3%;
+.filter .container-input-ingredients {
+  border: none;
+  display: block;
+  background-color: #3282F7;
+  font-family: 'Lato', sans-serif;
+  border-radius: 5px;
+  color: white;
+  height: 50px;
+  margin-right: 5%;
+  z-index: 2;
+}
+
+.filter .container-input-ingredients .container-input-ing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filter .container-input-ingredients .container-input-ing input {
+  border: none;
+  width: 120px;
+  background-color: #3282F7;
+  font-size: 18px;
+}
+
+.filter .container-input-ingredients .list-ingredients {
+  background-color: #3282F7;
+  color: white;
+  z-index: 2;
+  width: 580px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border-radius: 5px;
+  padding-left: 5px;
+  margin-top: 0;
+}
+
+.filter .container-input-ingredients .list-ingredients .element-ingredient {
+  font-family: 'Lato', sans-serif;
+  width: 30%;
+  list-style: none;
+  line-height: 28px;
+  font-size: 16px;
+}
+
+.filter .container-input-ustensils {
+  display: block;
+  background-color: #ED6454;
   font-family: 'Lato', sans-serif;
   border: none;
   border-radius: 5px;
   color: white;
-  width: 30%;
   height: 50px;
+  margin-right: 5%;
+  z-index: 2;
 }
 
-.filter #ingredients {
-  background-color: #3282F7;
+.filter .container-input-ustensils .container-input-ust {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.filter #devices {
-  background-color: #68D9A4;
-}
-
-.filter #ustensils {
+.filter .container-input-ustensils .container-input-ust input {
   background-color: #ED6454;
+  border: none;
+  width: 120px;
+  font-size: 18px;
+}
+
+.filter .container-input-ustensils .list-ustensils {
+  background-color: #ED6454;
+  color: white;
+  z-index: 2;
+  width: 580px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-left: 5px;
+  margin-top: 0;
+  border-radius: 5px;
+}
+
+.filter .container-input-ustensils .list-ustensils .element-ustensil {
+  font-family: 'Lato', sans-serif;
+  width: 30%;
+  list-style: none;
+  line-height: 28px;
+  font-size: 16px;
+}
+
+.filter .container-input-devices {
+  display: block;
+  background-color: #68D9A4;
+  font-family: 'Lato', sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  height: 50px;
+  margin-right: 5%;
+  z-index: 2;
+}
+
+.filter .container-input-devices .container-input-dev {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: auto;
+  height: 50px;
+  width: 200px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filter .container-input-devices .container-input-dev input {
+  background-color: #68D9A4;
+  border: none;
+  width: 120px;
+  font-size: 18px;
+}
+
+.filter .container-input-devices .list-devices {
+  background-color: #68D9A4;
+  color: white;
+  z-index: 2;
+  width: 580px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-left: 5px;
+  margin-top: 0;
+  border-radius: 5px;
+}
+
+.filter .container-input-devices .list-devices .element-device {
+  font-family: 'Lato', sans-serif;
+  width: 30%;
+  list-style: none;
+  line-height: 28px;
+  font-size: 16px;
+}
+
+.filter input::-webkit-input-placeholder {
+  color: white;
+  padding-left: 4%;
+}
+
+.filter input:-ms-input-placeholder {
+  color: white;
+  padding-left: 4%;
+}
+
+.filter input::-ms-input-placeholder {
+  color: white;
+  padding-left: 4%;
+}
+
+.filter input::placeholder {
+  color: white;
+  padding-left: 4%;
 }
 
 .container-article {
@@ -160,6 +338,7 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  font-family: 'Lato', sans-serif;
 }
 
 .container-article .article-recipe {
@@ -254,5 +433,8 @@ body {
   text-align: start;
   line-height: 14px;
   margin-right: 2%;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 /*# sourceMappingURL=style.css.map */
