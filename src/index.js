@@ -239,6 +239,7 @@ function displaySelectUstensils(recipes) {
     tagOptionUstensils.ariaLabel = `sélectionner l'ustensil ${ustensil}`
   }
   searchInUstensils(arrayUstensilFinish)
+
 }
 
 
@@ -453,12 +454,12 @@ function displayTag() {
 
         tagSelect.push(e.target.innerHTML)
 
-        for (el of allElementsUstensils) {
-          if (el.innerHTML === e.target.innerHTML){
-            console.log(el);
-            el.remove()
-          }
-        }
+        // for (el of allElementsUstensils) {
+        //   if (el.innerHTML === e.target.innerHTML){
+        //     console.log(el);
+        //     el.remove()
+        //   }
+        // }
         sortRecipesByTag(recipes) //appel de la fonction qui trie par tag avec en paramètre le tableau des tags sélectionnés
         closeTag(recipes)
        
