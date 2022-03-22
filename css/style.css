@@ -32,10 +32,11 @@ label {
 }
 
 .search {
+  margin-left: 2%;
   border: none;
   border-radius: 5px;
   height: 69px;
-  width: 100%;
+  width: 95%;
   background: url(../assets/search.svg) no-repeat 98%;
   background-color: #E7E7E7;
   font-family: 'Lato', sans-serif;
@@ -47,7 +48,7 @@ label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 2% 0%;
+  margin: 2% 2%;
   width: 100%;
 }
 
@@ -138,10 +139,11 @@ label {
 .filter {
   margin-top: 1%;
   margin-bottom: 3%;
+  margin-left: 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 45%;
+  width: 47%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -186,8 +188,6 @@ label {
   color: white;
   z-index: 2;
   width: 580px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   border-radius: 5px;
@@ -201,6 +201,7 @@ label {
   list-style: none;
   line-height: 28px;
   font-size: 16px;
+  padding-left: 2%;
 }
 
 .filter .container-input-ustensils {
@@ -242,8 +243,6 @@ label {
   color: white;
   z-index: 2;
   width: 580px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding-left: 5px;
@@ -252,6 +251,7 @@ label {
 }
 
 .filter .container-input-ustensils .list-ustensils .element-ustensil {
+  padding-left: 2%;
   font-family: 'Lato', sans-serif;
   width: 30%;
   list-style: none;
@@ -298,8 +298,6 @@ label {
   color: white;
   z-index: 2;
   width: 580px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding-left: 5px;
@@ -308,6 +306,7 @@ label {
 }
 
 .filter .container-input-devices .list-devices .element-device {
+  padding-left: 2%;
   font-family: 'Lato', sans-serif;
   width: 30%;
   list-style: none;
@@ -336,9 +335,9 @@ label {
 }
 
 .container-article {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -348,7 +347,8 @@ label {
 }
 
 .container-article .article-recipe {
-  width: 31%;
+  margin: 2%;
+  width: 29%;
   height: 364px;
   border-radius: 5px;
   margin-bottom: 5%;
